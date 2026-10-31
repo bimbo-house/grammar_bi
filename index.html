@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>比一比 · Практика: сравнения и одежда</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F1E7D6;--cream2:#E8DAC3;--sheet:#FCF8F1;
+  --blue:#C6D5E5;--blue2:#E4ECF4;--bluei:#55728F;
+  --red:#6B0E14;--red2:#8E1B22;--ink:#2B1416;--soft:rgba(43,20,22,.62);
+  --line:#E0D0B8;--ok:#33604C;--ok-bg:#DCE9DF;--bad-bg:#F4D9D5;
+  --kai:"Noto Serif SC","Kaiti SC","STKaiti","KaiTi",serif;
+  --sans:"Nunito Sans",-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --disp:"Cormorant Garamond","Noto Serif SC",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;overflow-x:hidden}
+::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:rgba(107,14,20,.35);border-radius:10px}
+button{font-family:inherit;color:inherit}
+
+/* ---------- фон: шёлк + ягоды ---------- */
+#silk{position:fixed;inset:-10%;width:120%;height:120%;pointer-events:none;z-index:0}
+#silk path{animation:drift 46s ease-in-out infinite alternate;transform-origin:center}
+#silk path:nth-child(2){animation-duration:58s;animation-delay:-12s}
+#silk path:nth-child(3){animation-duration:70s;animation-delay:-30s}
+@keyframes drift{0%{transform:translate(-3%,0) skewY(0)}50%{transform:translate(2%,1.5%) skewY(1.2deg)}100%{transform:translate(4%,-1%) skewY(-.8deg)}}
+.stitch{position:fixed;inset:14px;border:1.5px dashed rgba(107,14,20,.13);border-radius:26px;pointer-events:none;z-index:0}
+#berries{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.berry{position:absolute;bottom:-40px;border-radius:50%;background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.55) 0 12%,transparent 13%),radial-gradient(circle at 50% 50%,#8E1B22,#4a070b);opacity:.16;animation:rise linear infinite}
+@keyframes rise{to{transform:translate(var(--dx),-115vh) rotate(160deg)}}
+.wm{position:fixed;right:-20px;bottom:-70px;font-family:var(--kai);font-size:380px;font-weight:900;color:rgba(107,14,20,.045);pointer-events:none;z-index:0;line-height:1}
+@media (prefers-reduced-motion:reduce){#silk path,.berry{animation:none}.berry{display:none}}
+
+/* ---------- верхняя панель ---------- */
+#bar{position:sticky;top:0;z-index:40;background:rgba(241,231,214,.93);backdrop-filter:blur(8px);border-bottom:1.6px solid var(--red);padding:9px 22px}
+.bar-in{max-width:1100px;margin:0 auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.bar-in .ttl{font-family:var(--kai);font-weight:900;font-size:18px;color:var(--red)}
+.pg{flex:1;min-width:120px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800}
+.pg .track{flex:1;height:8px;border:1.4px solid var(--red);position:relative;border-radius:99px;overflow:hidden;background:var(--sheet)}
+.pg .track i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--blue),var(--red2));transition:width .4s}
+.tg{border:1.5px solid var(--red);background:transparent;padding:5px 13px;font-size:12px;font-weight:800;border-radius:999px;cursor:pointer;transition:.15s;color:var(--red)}
+.tg:hover,.tg.on{background:var(--red);color:var(--cream)}
+.fa{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--red);border:1.5px dashed var(--red2);border-radius:99px;padding:3px 11px;background:var(--sheet)}
+.fa b{font-family:var(--kai);font-size:16px}
+.fa.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.25);background:var(--bad-bg)}}
+
+header{position:relative;z-index:2;padding:46px 24px 18px;max-width:1100px;margin:0 auto}
+.stamp{display:inline-block;border:2px solid var(--red);color:var(--red);font-weight:800;letter-spacing:.22em;padding:5px 14px;font-size:12px;border-radius:99px;margin-bottom:14px;background:var(--sheet)}
+h1{font-family:var(--kai);font-size:clamp(46px,8vw,92px);line-height:1;font-weight:900;color:var(--red)}
+h1 .latin{font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,30px);display:block;margin-top:10px;color:var(--bluei);letter-spacing:.02em}
+.lead{max-width:720px;margin-top:14px;color:var(--soft);font-size:15px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+nav a{color:var(--red);text-decoration:none;border:1.5px solid var(--red);padding:7px 14px;font-size:13px;font-weight:700;border-radius:999px;transition:.18s;background:rgba(252,248,241,.6)}
+nav a:hover{background:var(--red);color:var(--cream);transform:translateY(-2px)}
+nav a b{font-family:var(--kai);margin-right:6px}
+
+main{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 24px 80px}
+section.task{margin-top:64px;scroll-margin-top:70px}
+.sec-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.sec-num{font-family:var(--kai);font-size:21px;font-weight:900;color:var(--cream);background:var(--red);border-radius:50%;width:46px;height:46px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 4px var(--blue)}
+h2{font-family:var(--disp);font-size:clamp(25px,4vw,36px);font-weight:700;flex:1;min-width:220px;color:var(--red);line-height:1.15}
+h2 .zh{font-family:var(--kai);font-weight:900}
+.tgs{display:flex;gap:6px}
+.mini{border:1.4px solid var(--red);background:var(--sheet);padding:3px 11px;font-size:11.5px;font-weight:800;border-radius:999px;cursor:pointer;color:var(--red)}
+.mini.on{background:var(--red);color:var(--cream)}
+.sec-sub{color:var(--soft);font-size:14.5px;max-width:760px;margin-bottom:18px}
+.panel{background:var(--sheet);border-radius:22px;padding:24px;position:relative;box-shadow:0 10px 30px -18px rgba(107,14,20,.45);border:1px solid var(--line)}
+.panel::before{content:"";position:absolute;inset:7px;border:1.3px dashed rgba(107,14,20,.17);border-radius:17px;pointer-events:none}
+.shot{margin-top:22px;border:1.4px dashed var(--red2);border-radius:12px;padding:8px 13px;font-size:12.5px;font-weight:800;color:var(--red2);text-align:center;letter-spacing:.04em;background:rgba(198,213,229,.25)}
+.shot::before{content:"📸 "}
+.subhead{font-family:var(--disp);font-size:24px;font-weight:700;margin:26px 0 12px;color:var(--red);border-bottom:1.4px solid var(--line);padding-bottom:5px}
+.subhead .zh{font-family:var(--kai)}
+.culture{margin-top:20px;border-left:4px solid var(--red);background:var(--blue2);border-radius:0 14px 14px 0;padding:12px 16px;font-size:14px}
+.culture .ch-t{font-family:var(--kai);font-weight:900;color:var(--red);font-size:16px;margin-bottom:4px;display:block}
+.culture b.zh,.culture .zh{font-family:var(--kai)}
+.warn{margin-top:14px;border:1.5px solid var(--red2);background:var(--bad-bg);border-radius:12px;padding:12px 16px;font-size:14px}
+.warn .h{font-weight:800;color:var(--red2);display:block;margin-bottom:4px}
+.zh{font-family:var(--kai)}
+s.zh,.no{text-decoration:line-through;text-decoration-color:var(--red2);color:var(--red2)}
+.foot{font-size:12.5px;color:var(--soft);margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+
+.btn{font-weight:800;font-size:13px;border:1.6px solid var(--red);background:var(--sheet);color:var(--red);padding:8px 16px;cursor:pointer;border-radius:999px;transition:.15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--red);color:var(--cream)}
+.btn.blue{background:var(--blue);border-color:var(--bluei);color:var(--red)}
+.btn.small{padding:5px 12px;font-size:12px}
+.btn[disabled]{opacity:.45;cursor:default;transform:none}
+.row-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.msg{font-weight:800;font-size:13.5px}
+.msg.ok{color:var(--ok)}.msg.bad{color:var(--red2)}
+.score{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-weight:800;font-size:14px;margin-top:18px;color:var(--red)}
+.score .bar{flex:1;min-width:130px;height:9px;border:1.5px solid var(--red);position:relative;border-radius:99px;overflow:hidden}
+.score .bar i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--blue),var(--red2));transition:width .4s}
+.shake{animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* пиньинь / перевод */
+.py{color:var(--bluei);font-weight:600;font-style:italic}
+.tr{color:var(--soft)}
+.nopy .py{display:none!important}
+.notr .tr{display:none!important}
+
+/* слова вне фрейма — пунктир + подсказка */
+.x{border-bottom:1.6px dotted var(--red2);cursor:help;position:relative;display:inline}
+.x::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 7px);transform:translate(-50%,4px);background:var(--red);color:var(--cream);font-family:var(--sans);font-size:12.5px;font-weight:700;font-style:normal;line-height:1.3;white-space:nowrap;padding:5px 10px;border-radius:9px;opacity:0;pointer-events:none;transition:.15s;z-index:30;box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}
+.x:hover::after,.x.open::after,.x:focus::after{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- словарь ---------- */
+.dict-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.inp{border:1.6px solid var(--red);background:#fff;padding:8px 12px;font-size:14px;font-family:var(--sans);outline:none;border-radius:12px;color:var(--ink)}
+.inp:focus{box-shadow:0 0 0 3px var(--blue)}
+#dSearch{flex:1;min-width:200px}
+.cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cat{border:1.3px solid var(--bluei);background:var(--blue2);color:var(--red);font-size:12px;font-weight:800;padding:3px 11px;border-radius:99px;cursor:pointer}
+.cat.on{background:var(--red);border-color:var(--red);color:var(--cream)}
+.bank-head{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:8px}
+.dlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:8px;max-height:430px;overflow:auto;padding:2px 4px 2px 2px}
+.dcard{display:grid;grid-template-columns:28px 1fr auto;gap:6px;align-items:center;border:1px solid var(--line);background:#fff;padding:7px 9px;border-radius:12px}
+.dcard.imp{border:1.4px dashed var(--red2)}
+.dcard.xa{background:var(--blue2)}
+.dcard .dc{font-family:var(--kai);font-size:23px;font-weight:900;line-height:1.15;color:var(--red)}
+.dcard .meta{font-size:12.5px;line-height:1.3;display:block}
+.mwb{font-family:var(--kai);font-weight:700;font-size:13px;background:var(--blue);color:var(--red);border-radius:8px;padding:1px 7px;white-space:nowrap}
+.star{border:none;background:none;font-size:19px;cursor:pointer;color:rgba(107,14,20,.22)}
+.star.on{color:var(--red2)}
+.fc-set{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:13px;font-weight:700}
+.fc-set select{border:1.4px solid var(--red);background:#fff;padding:6px 8px;font-family:var(--sans);font-size:13px;color:var(--ink);border-radius:10px}
+.fc-set label{display:flex;gap:5px;align-items:center;cursor:pointer}
+.fc-stage{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.fcard{width:min(440px,100%);min-height:210px;perspective:1000px;cursor:pointer}
+.fcard .in{position:relative;width:100%;min-height:210px;transition:transform .5s;transform-style:preserve-3d}
+.fcard.flip .in{transform:rotateY(180deg)}
+.fcard .face{position:absolute;inset:0;backface-visibility:hidden;border:2px solid var(--red);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;text-align:center;border-radius:20px;box-shadow:0 12px 24px -14px rgba(107,14,20,.5)}
+.fcard .back{transform:rotateY(180deg);background:var(--blue2)}
+.fcard .big{font-family:var(--kai);font-size:60px;font-weight:900;line-height:1.1;color:var(--red)}
+.fcard .mid{font-size:22px;font-weight:800}
+.fcard .hint{font-size:12px;color:var(--soft);margin-top:10px}
+.fc-info{font-size:13px;font-weight:700;color:var(--soft)}
+
+/* ---------- шпаргалка ---------- */
+.adjs{display:flex;flex-wrap:wrap;gap:8px}
+.pair{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px 10px}
+.pair .w{font-family:var(--kai);font-weight:900;font-size:21px;color:var(--red);text-align:center;line-height:1.1}
+.pair .w small{display:block;font-family:var(--sans);font-size:11px;font-weight:600;line-height:1.2}
+.pair .dash{color:var(--soft)}
+.gcards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:820px){.gcards{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.gcard .gh{background:var(--red);color:var(--cream);padding:9px 16px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.gcard .gh .zh{font-size:26px;font-weight:900}
+.gcard .gh small{font-size:13px;font-weight:700;opacity:.9}
+.gcard .gb{padding:12px 16px}
+.formula{font-family:var(--kai);font-size:19px;font-weight:700;background:var(--blue2);border-radius:10px;padding:6px 12px;margin-bottom:10px;color:var(--red)}
+.formula i{font-family:var(--sans);font-style:normal;font-size:14px;color:var(--bluei);font-weight:800}
+.eg{border-left:3px solid var(--red2);padding:3px 10px;margin:7px 0;background:rgba(198,213,229,.18);border-radius:0 8px 8px 0}
+.eg .c{font-family:var(--kai);font-size:20px;font-weight:700;line-height:1.5}
+.eg .c em{font-style:normal;color:var(--red2);background:rgba(142,27,34,.08);border-radius:4px;padding:0 2px}
+.eg .py,.eg .tr{display:block;font-size:13px}
+.eg .who{font-family:var(--sans);font-size:12px;font-weight:800;color:var(--bluei);margin-right:4px}
+.gb ul{margin:8px 0 0 18px;font-size:14px}
+.gb li{margin-bottom:5px}
+.gb li .zh{font-size:16px;font-weight:700}
+table.cmp{width:100%;border-collapse:separate;border-spacing:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;margin:10px 0;font-size:14px}
+table.cmp th{background:var(--red);color:var(--cream);text-align:left;padding:7px 12px;font-size:13px}
+table.cmp td{padding:7px 12px;border-top:1px solid var(--line);vertical-align:top}
+table.cmp tr:nth-child(even) td{background:#FAF4EA}
+table.cmp td .zh{font-size:17px;font-weight:700}
+.tbl-wrap{overflow-x:auto}
+
+/* ---------- упражнение 1: ситуации ---------- */
+.sit{border:1px solid var(--line);background:#fff;border-radius:18px;padding:14px 16px;margin-bottom:14px}
+.sit.ok{border-color:var(--ok);background:var(--ok-bg)}
+.sit.bad{border-color:var(--red2)}
+.sit .top{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:10px}
+.num{width:28px;height:28px;flex:none;border-radius:50%;background:var(--blue);color:var(--red);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.ptag{border:1.4px solid var(--red);border-radius:12px;background:var(--sheet);padding:4px 10px 4px 12px;display:flex;gap:8px;align-items:center;position:relative}
+.ptag::before{content:"";width:7px;height:7px;border-radius:50%;border:1.4px solid var(--red);position:absolute;left:-4px;top:50%;transform:translateY(-50%);background:var(--cream)}
+.ptag .zh{font-size:17px;font-weight:700}
+.ptag .v{font-weight:800;color:var(--red2);font-size:14px;white-space:nowrap}
+.sit .task-ru{font-weight:700;font-size:14.5px;flex:1;min-width:220px}
+.sit .task-ru .zh{font-size:17px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:760px){.opts{grid-template-columns:1fr}}
+.opt{text-align:left;border:1.5px solid var(--line);background:var(--sheet);border-radius:14px;padding:8px 12px;cursor:pointer;transition:.15s;position:relative}
+.opt .c{font-family:var(--kai);font-size:19px;font-weight:700;display:block;line-height:1.5}
+.opt .py{display:block;font-size:12.5px}
+.opt:hover{border-color:var(--bluei)}
+.opt.sel{border-color:var(--red);background:var(--blue2);box-shadow:inset 0 0 0 1px var(--red)}
+.opt.sel::after{content:"✓";position:absolute;right:10px;top:8px;font-weight:900;color:var(--red)}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--red2);background:var(--bad-bg)}
+.opt.miss{border-style:dashed;border-color:var(--ok)}
+.opt .note{display:none;font-size:12.5px;font-weight:700;margin-top:4px;color:var(--red2)}
+.opt.right .note{color:var(--ok)}
+.done .opt .note{display:block}
+.opt .note:empty{display:none!important}
+.sit .foot2{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+
+/* штраф */
+.fa-stamp{position:absolute;right:16px;top:-10px;font-family:var(--kai);font-weight:900;font-size:34px;color:var(--red2);border:3px solid var(--red2);border-radius:12px;padding:0 9px;transform:rotate(-12deg) scale(1.6);opacity:0;background:rgba(252,248,241,.9);pointer-events:none;z-index:5;line-height:1.25}
+.fa-stamp small{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.06em;text-align:center;line-height:1.1;padding-bottom:3px}
+.fa-stamp.go{animation:stampIn 2.2s ease forwards}
+@keyframes stampIn{0%{opacity:0;transform:rotate(-12deg) scale(1.7)}12%{opacity:1;transform:rotate(-12deg) scale(1)}75%{opacity:1}100%{opacity:0;transform:rotate(-12deg) scale(1)}}
+.rel{position:relative}
+
+/* ---------- упражнение 2: редактор ---------- */
+.ed{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:12px}
+.ed.ok{border-color:var(--ok);background:var(--ok-bg)}
+.ed.bad{border-color:var(--red2);background:var(--bad-bg)}
+.ed .row1{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ed .s{flex:1;min-width:240px}
+.ed .s .c{font-family:var(--kai);font-size:21px;font-weight:700}
+.ed .s .py,.ed .s .tr{display:block;font-size:12.5px}
+.judge{display:flex;gap:6px}
+.jb{border:1.5px solid var(--red);background:var(--sheet);border-radius:99px;padding:6px 14px;font-weight:800;font-size:13px;cursor:pointer;color:var(--red)}
+.jb.sel{background:var(--red);color:var(--cream)}
+.fix{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.fix.show{display:block}
+.fix .lab{font-size:12.5px;font-weight:800;color:var(--bluei);margin-bottom:6px}
+.fixopts{display:flex;flex-direction:column;gap:6px}
+.fo{text-align:left;border:1.4px solid var(--line);background:var(--sheet);border-radius:12px;padding:6px 12px;cursor:pointer}
+.fo .c{font-family:var(--kai);font-size:18px;font-weight:700}
+.fo .py{display:block;font-size:12px}
+.fo.sel{border-color:var(--red);background:var(--blue2)}
+.fo.right{border-color:var(--ok);background:var(--ok-bg)}
+.fo.wrong{border-color:var(--red2);background:var(--bad-bg)}
+.expl{display:none;margin-top:8px;font-size:13.5px;font-weight:600}
+.ed.checked .expl{display:block}
+
+/* ---------- упражнение 3: сборка ---------- */
+.sitem{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:12px}
+.sitem.ok{border-color:var(--ok);background:var(--ok-bg)}.sitem.bad{border-color:var(--red2);background:var(--bad-bg)}
+.sitem .ru{font-weight:800;font-size:14.5px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
+.sans{min-height:56px;border:1.5px dashed var(--bluei);border-radius:12px;background:rgba(198,213,229,.25);display:flex;gap:6px;flex-wrap:wrap;padding:6px;align-items:center;margin-bottom:8px}
+.spool{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-family:var(--kai);font-size:20px;font-weight:700;border:1.5px solid var(--red);background:var(--sheet);padding:4px 11px;cursor:pointer;user-select:none;transition:.15s;line-height:1.2;color:var(--ink);text-align:center;border-radius:12px}
+.chip:hover{transform:translateY(-2px);box-shadow:0 5px 10px -6px rgba(107,14,20,.5)}
+.chip.sel{background:var(--red);color:var(--cream)}
+.chip.sel .py{color:var(--blue)}
+.chip .py,.chip .tr{display:block;font-family:var(--sans);font-size:11px;line-height:1.2;font-style:normal}
+.chip.done{border-color:var(--ok);background:var(--ok-bg);cursor:default;transform:none;box-shadow:none}
+.sitem .diag{font-size:13.5px;font-weight:700;margin-top:6px}
+
+/* ---------- упражнение 4: калькулятор ---------- */
+.calc{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.cc{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px}
+.cc.ok{border-color:var(--ok);background:var(--ok-bg)}
+.cc .sent{font-family:var(--kai);font-size:20px;font-weight:700;margin:8px 0 2px;line-height:1.6}
+.cc .sent .gap{display:inline-block;min-width:64px;border-bottom:2.5px solid var(--red2);text-align:center;color:var(--red2)}
+.cc .py{font-size:12.5px;display:block}
+.cc .copts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.cb{font-family:var(--kai);font-size:17px;font-weight:700;border:1.5px solid var(--red);background:var(--sheet);border-radius:10px;padding:3px 10px;cursor:pointer}
+.cb.wrong{background:var(--bad-bg);border-color:var(--red2);text-decoration:line-through}
+.cb.right{background:var(--ok-bg);border-color:var(--ok)}
+.cc .ex2{display:none;font-size:13px;font-weight:600;margin-top:6px;color:var(--ok)}
+.cc.ok .ex2{display:block}
+
+/* ---------- перевод ---------- */
+.tri{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:12px}
+.tri.ok{border-color:var(--ok);background:var(--ok-bg)}.tri.bad{border-color:var(--red2)}
+.tri .ru{font-weight:800;font-size:15px;display:flex;gap:8px;align-items:flex-start;margin-bottom:8px}
+.tri .ru small{display:block;font-weight:600;font-size:12.5px;color:var(--bluei)}
+.tri .irow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tinp{flex:1;min-width:220px;font-family:var(--kai);font-size:21px;font-weight:700;border:1.6px dashed var(--bluei);background:var(--sheet);border-radius:12px;padding:7px 12px;outline:none;color:var(--ink)}
+.tinp:focus{border-style:solid;box-shadow:0 0 0 3px var(--blue)}
+.tri.ok .tinp{border-color:var(--ok);background:#fff}
+.hintw{display:none;flex-wrap:wrap;gap:6px;margin-top:8px}
+.hintw.show{display:flex}
+.hintw .chip{font-size:17px;cursor:default}
+.tres{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;font-size:14px}
+.tri.checked .tres{display:block}
+.tres .verdict{font-weight:800;margin-bottom:6px}
+.tres ul{margin:0 0 8px 18px}
+.tres li{margin-bottom:3px;font-weight:600}
+.tres .lab{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--bluei);margin:8px 0 3px}
+.diff{font-family:var(--kai);font-size:21px;font-weight:700;line-height:1.7}
+.diff del{color:var(--red2);background:var(--bad-bg);text-decoration:line-through;border-radius:4px;padding:0 1px}
+.diff ins{color:var(--ok);background:var(--ok-bg);text-decoration:none;border-bottom:2px solid var(--ok);border-radius:4px;padding:0 1px}
+.ansl{margin:3px 0}
+.ansl .c{font-family:var(--kai);font-size:20px;font-weight:700}
+.ansl .py{display:block;font-size:12.5px}
+.legend{font-size:12px;color:var(--soft)}
+
+/* ---------- счётные слова ---------- */
+.shelves{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media (max-width:820px){.shelves{grid-template-columns:1fr 1fr}}
+.shelf{border:1.5px solid var(--red);background:#fff;border-radius:16px;min-height:150px;cursor:pointer;overflow:hidden;display:flex;flex-direction:column}
+.shelf.hot{box-shadow:0 0 0 3px var(--blue)}
+.shelf .lbl{background:var(--red);color:var(--cream);padding:6px 12px;display:flex;align-items:baseline;gap:8px}
+.shelf .lbl .ic{font-family:var(--kai);font-size:28px;font-weight:900}
+.shelf .lbl .nm{font-size:12px;font-weight:700;opacity:.9;line-height:1.2}
+.shelf .slot{flex:1;padding:8px;display:flex;gap:5px;flex-wrap:wrap;align-content:flex-start}
+.shelf .slot .chip{font-size:16px;padding:2px 8px}
+.sbank{display:flex;gap:7px;flex-wrap:wrap;border:1.5px dashed var(--bluei);border-radius:14px;padding:12px;background:rgba(198,213,229,.22);min-height:56px}
+.wr{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);background:#fff;border-radius:14px;padding:9px 12px;margin-bottom:9px}
+.wr.ok{border-color:var(--ok);background:var(--ok-bg)}.wr.bad{border-color:var(--red2);background:var(--bad-bg)}
+.wr .q{font-size:13.5px;font-weight:800;min-width:230px;flex:1}
+.wr .s{font-family:var(--kai);font-size:21px;font-weight:700;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.cyc{font-family:var(--kai);font-size:19px;font-weight:700;border:1.8px dashed var(--red2);background:var(--sheet);min-width:52px;padding:1px 10px;cursor:pointer;color:var(--red2);border-radius:10px}
+.cyc.set{border-style:solid;background:var(--red);color:var(--cream);border-color:var(--red)}
+.wr .py{display:block;font-size:12.5px;width:100%}
+.wr .note2{font-size:12.5px;font-weight:700;color:var(--red2);width:100%}
+
+/* ---------- письмо ---------- */
+.wp{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:12px}
+.wp .q{font-weight:800;font-size:14.5px}
+.wp .hint2{font-size:13px;color:var(--soft);margin:3px 0 8px}
+.wp textarea{width:100%;min-height:74px;border:1.5px solid var(--bluei);border-radius:12px;padding:9px 12px;font-family:var(--kai);font-size:19px;background:var(--sheet);resize:vertical;outline:none;color:var(--ink)}
+.wp textarea:focus{box-shadow:0 0 0 3px var(--blue)}
+
+footer{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:24px 24px 46px;color:var(--soft);font-size:13px;border-top:1.6px solid var(--red)}
+footer .cp{font-weight:800;color:var(--red);font-size:14px;margin-top:6px}
+@media (max-width:640px){.panel{padding:16px}header,main,footer{padding-left:16px;padding-right:16px}}
+@media print{#bar,#berries,#silk,nav,.wm,.stitch{display:none}body{background:#fff}.panel{box-shadow:none}section.task{break-inside:avoid-page}.dlist{max-height:none}}
+</style>
+</head>
+<body>
+<svg id="silk" viewBox="0 0 1200 900" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="gS1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C6D5E5" stop-opacity=".55"/><stop offset=".55" stop-color="#E4ECF4" stop-opacity=".25"/><stop offset="1" stop-color="#C6D5E5" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="gS2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCF8F1" stop-opacity=".7"/><stop offset="1" stop-color="#E8DAC3" stop-opacity=".2"/></linearGradient>
+    <linearGradient id="gS3" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8E1B22" stop-opacity=".07"/><stop offset="1" stop-color="#C6D5E5" stop-opacity=".22"/></linearGradient>
+  </defs>
+  <path fill="url(#gS1)" d="M0,170 C210,90 360,260 600,190 C840,120 980,250 1200,160 L1200,0 L0,0 Z"/>
+  <path fill="url(#gS2)" d="M0,520 C190,430 380,610 640,540 C880,470 1010,600 1200,520 L1200,640 C980,700 820,590 600,660 C380,730 200,610 0,680 Z"/>
+  <path fill="url(#gS3)" d="M0,820 C250,740 430,900 700,830 C930,770 1060,860 1200,800 L1200,900 L0,900 Z"/>
+</svg>
+<div class="stitch"></div>
+<div id="berries" aria-hidden="true"></div>
+<div class="wm">比</div>
+
+<div id="bar"><div class="bar-in">
+  <span class="ttl">比一比 · 服装</span>
+  <button class="tg on" id="gPy">拼音 везде</button>
+  <button class="tg on" id="gTr">перевод везде</button>
+  <div class="pg"><div class="track"><i id="pgBar"></i></div><span id="pgTxt">0%</span></div>
+  <span class="fa" id="faBox" title="Штраф за забытое или неверное счётное слово"><b>罚</b> штраф: <span id="faN">0</span></span>
+  <button class="tg" id="gPrint">печать</button>
+  <button class="tg" id="gReset">сбросить</button>
+</div></div>
+
+<header>
+  <div class="stamp">ПРАКТИКА · 比较 · СРАВНЕНИЯ</div>
+  <h1>比一比<span class="latin">比 · 没有…那么 · 不如 · 不比 · 一点 · 得多 · 厘米</span></h1>
+  <p class="lead">Сравниваем одежду и аксессуары: «дороже», «не такой тёплый, как», «уступает», «вовсе не длиннее», «на 50 юаней дешевле», «на 3 сантиметра короче». Ответы сохраняются в браузере. Слова, подчёркнутые <span class="x" data-tip="xūxiàn · пунктир">пунктиром</span>, — вне списка урока: наведите курсор или нажмите, чтобы увидеть пиньинь и перевод. <b style="color:var(--red2)">Внимание:</b> за забытое или неверное счётное слово начисляется штраф <span class="zh" style="color:var(--red2);font-weight:900">罚</span> fá.</p>
+  <nav>
+    <a href="#dict"><b>词</b>Словарь</a>
+    <a href="#gram"><b>法</b>Шпаргалка</a>
+    <a href="#ex1"><b>一</b>Ситуации</a>
+    <a href="#ex2"><b>二</b>Редактор</a>
+    <a href="#ex3"><b>三</b>Собери фразу</a>
+    <a href="#ex4"><b>四</b>На сколько?</a>
+    <a href="#trans"><b>五</b>Перевод</a>
+    <a href="#mw"><b>六</b>Счётные слова</a>
+    <a href="#write"><b>七</b>Напишите сами</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ СЛОВАРЬ ============ -->
+<section class="task" id="dict">
+  <div class="sec-head"><div class="sec-num">词</div><h2>Словарь урока</h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Все слова урока по темам. Значок <span class="mwb">件</span> — счётное слово. Голубые карточки — дополнительные прилагательные. Звёздочкой ★ отмечайте трудные слова; свои слова можно добавить импортом (CSV, TSV или JSON), а список выгрузить в Anki.</p>
+  <div class="panel">
+    <div class="dict-tools">
+      <input class="inp" id="dSearch" placeholder="Поиск: иероглиф, пиньинь без тонов, перевод…">
+      <button class="btn small" id="dStar">★ только избранные</button>
+    </div>
+    <div class="cats" id="dCats"></div>
+    <div class="dict-tools">
+      <span class="bank-head" style="margin:0">Экспорт:</span>
+      <button class="btn small" id="dCsv">CSV</button><button class="btn small" id="dAnki">Anki TSV</button><button class="btn small" id="dJson">JSON</button>
+      <span class="bank-head" style="margin:0 0 0 10px">Импорт:</span>
+      <label class="btn small primary" style="cursor:pointer">загрузить файл<input type="file" id="dImp" accept=".csv,.tsv,.txt,.json" hidden></label>
+      <button class="btn small" id="dImpClear">убрать добавленные</button>
+      <span class="msg" id="dMsg"></span>
+    </div>
+    <div class="dlist" id="dList"></div>
+    <div class="foot">Формат импорта: строка <b class="zh">иероглиф, пиньинь, перевод</b> (через запятую, точку с запятой или табуляцию) либо JSON-массив вида [{"c":"…","p":"…","r":"…"}].</div>
+
+    <div class="subhead">Карточки для повторения</div>
+    <div class="fc-set">
+      <select id="fcDir"><option value="zh">汉字 → русский</option><option value="ru">русский → 汉字</option><option value="py">пиньинь → 汉字</option></select>
+      <select id="fcSrc"><option value="all">все слова</option><option value="cat">текущая тема</option><option value="star">только ★</option><option value="new">ещё не выученные</option></select>
+      <select id="fcN"><option value="10">10 карточек</option><option value="20">20 карточек</option><option value="999">все</option></select>
+      <label><input type="checkbox" id="fcShuf" checked> перемешать</label>
+      <label><input type="checkbox" id="fcHint"> пиньинь на лицевой стороне</label>
+      <label><input type="checkbox" id="fcMw" checked> показывать счётное слово</label>
+      <button class="btn small primary" id="fcStart">▶ начать</button>
+    </div>
+    <div class="fc-stage">
+      <div class="fcard" id="fcCard"><div class="in"><div class="face front" id="fcFront"><div class="mid">Нажмите «начать»</div><div class="hint">карточка переворачивается по клику</div></div><div class="face back" id="fcBack"></div></div></div>
+      <div class="row-btns" style="margin:0"><button class="btn" id="fcAgain" disabled>↺ ещё повторю</button><button class="btn primary" id="fcKnow" disabled>✓ знаю</button></div>
+      <div class="fc-info" id="fcInfo"></div>
+    </div>
+    <div class="culture rx"><span class="ch-t">文化 · 中山装, 汉服 и 新中式</span>Самый известный китайский <b class="zh">正装</b> XX века — <b class="zh">中山装</b> Zhōngshānzhuāng, «костюм Сунь Ятсена» (на Западе его называют «френч Мао»): четыре накладных кармана и стоячий воротник. Сегодня в моде <b class="zh">新中式</b> xīn Zhōngshì — «новый китайский стиль»: застёжки-«узелки», воротник-стойка и шёлк в обычной <b class="zh">休闲装</b>. А молодёжь по выходным надевает <b class="zh">汉服</b> Hànfú — реконструкцию старинного костюма — и гуляет так по паркам и храмам.</div>
+    <div class="shot">Пришлите скриншот выполненного упражнения</div>
+  </div>
+</section>
+
+<!-- ============ ШПАРГАЛКА ============ -->
+<section class="task" id="gram">
+  <div class="sec-head"><div class="sec-num">法</div><h2>Шпаргалка: как сравнивать</h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Прочитайте перед упражнениями и возвращайтесь сюда, если ошиблись. Ключевое слово в примерах выделено цветом.</p>
+  <div class="panel rx">
+    <div class="subhead" style="margin-top:0">Прилагательные для сравнения</div>
+    <p style="font-size:14px;margin-bottom:10px">Слева — прилагательные из урока, справа — их пары. Пары с пунктиром — дополнительные слова: они пригодятся в упражнениях.</p>
+    <div class="adjs" id="adjPairs"></div>
+
+    <div class="subhead">Четыре конструкции</div>
+    <div class="gcards">
+      <div class="gcard"><div class="gh"><span class="zh">比</span><small>A … чем B (A больше / дороже / длиннее)</small></div><div class="gb">
+        <div class="formula">A 比 B + прилаг. <i>A прилаг.-ее, чем B</i></div>
+        <div class="eg" data-t="Этот свитер теплее того.">这件毛衣[比]那件暖和。</div>
+        <div class="eg" data-t="Кроссовки удобнее кожаных туфель.">运动鞋[比]{皮鞋}舒服。</div>
+        <ul>
+          <li>Повторяющееся существительное после <span class="zh">那</span> можно опустить, но <b>счётное слово остаётся</b>: <span class="zh">比那件</span> ✓, <s class="zh">比那</s> ✗.</li>
+          <li>После <span class="zh">的</span> счётное слово не нужно: <span class="zh">我的外套比你的厚</span>.</li>
+          <li>Перед прилагательным нельзя <span class="zh">很 / 非常 / 太</span>. Можно <span class="zh">更</span> «ещё более» и <span class="zh">还</span> «даже ещё»: <span class="zh">这件比那件更贵</span>.</li>
+          <li>Отрицание не ставится внутрь: <s class="zh">比那件不贵</s> — вместо этого <span class="zh">没有</span>.</li>
+        </ul></div></div>
+      <div class="gcard"><div class="gh"><span class="zh">没有 … 那么</span><small>A не такой …, как B</small></div><div class="gb">
+        <div class="formula">A 没有 B (那么 / 这么) + прилаг.</div>
+        <div class="eg" data-t="Эта юбка не такая дорогая, как та.">这条裙子[没有]那条[那么]贵。</div>
+        <div class="eg" data-t="Моя куртка не такая толстая, как твоя.">我的外套[没有]你的厚。</div>
+        <ul>
+          <li>Это обычное, нейтральное отрицание сравнения: «A меньше B по этому признаку».</li>
+          <li><span class="zh">那么</span> — B далеко, «как тот»; <span class="zh">这么</span> — B рядом, «как вот этот». Можно и опустить.</li>
+          <li>После прилагательного <b>ничего не добавляют</b>: <s class="zh">没有那条贵一点</s>, <s class="zh">没有那条贵五十块</s>.</li>
+        </ul></div></div>
+      <div class="gcard"><div class="gh"><span class="zh">不如</span><small>A уступает B, A хуже B</small></div><div class="gb">
+        <div class="formula">A 不如 B (+ прилаг.)</div>
+        <div class="eg" data-t="Это платье смотрится хуже, чем то.">这条连衣裙[不如]那条好看。</div>
+        <div class="eg" data-t="Эти туфли хуже тех.">这双鞋[不如]那双。</div>
+        <ul>
+          <li>Это <b>оценка</b>: B лучше. Без прилагательного значит просто «хуже».</li>
+          <li>Прилагательное — желательное качество: <span class="zh">好看, 舒服, 暖和, 漂亮</span>. С «плохими» не говорят: <s class="zh">不如那条{难看}</s>.</li>
+          <li>Как и после <span class="zh">没有</span>, разницу не добавляют: <s class="zh">不如那条好看一点</s>.</li>
+        </ul></div></div>
+      <div class="gcard"><div class="gh"><span class="zh">不比</span><small>A вовсе не …, чем B (возражение)</small></div><div class="gb">
+        <div class="formula">A 不比 B + прилаг. <i>«не больше, чем»</i></div>
+        <div class="eg" data-t="— Эта куртка слишком дорогая!"><span class="who">朋友:</span>这件外套太贵了！</div>
+        <div class="eg" data-t="— Не дорогая! Она ничуть не дороже той.">不贵！它[不比]那件贵。</div>
+        <ul>
+          <li><span class="zh">不比</span> отвечает на чужие слова или ожидание: «вовсе не дороже» = примерно так же, а может, и дешевле.</li>
+          <li>Для простого «не такой дорогой, как» выбирайте <span class="zh">没有</span>, а не <span class="zh">不比</span>.</li>
+        </ul></div></div>
+    </div>
+    <div class="tbl-wrap"><table class="cmp">
+      <tr><th>Фраза</th><th>Что она значит</th></tr>
+      <tr><td><span class="zh">这件没有那件贵。</span></td><td>Эта <b>дешевле</b> той (нейтрально).</td></tr>
+      <tr><td><span class="zh">这件不比那件贵。</span></td><td>Эта <b>не дороже</b> той — примерно такая же; возражение.</td></tr>
+      <tr><td><span class="zh">这件不如那件好看。</span></td><td>Эта <b>хуже</b> на вид, та лучше (оценка).</td></tr>
+      <tr><td><span class="zh">这件比那件贵。</span></td><td>Эта <b>дороже</b> той.</td></tr>
+    </table></div>
+
+    <div class="subhead">Насколько? Разница — после прилагательного</div>
+    <div class="tbl-wrap"><table class="cmp">
+      <tr><th>Формула</th><th>Значение</th><th>Пример</th></tr>
+      <tr><td><span class="zh">比 B + прил. + 一点 / 一些</span></td><td>чуть-чуть, немного</td><td><span class="zh">这件T恤比那件便宜一点。</span></td></tr>
+      <tr><td><span class="zh">比 B + прил. + 得多 / 多了</span></td><td>гораздо, намного</td><td><span class="zh">这块手表比那块贵得多。</span></td></tr>
+      <tr><td><span class="zh">比 B + прил. + число + единица</span></td><td>точная разница</td><td><span class="zh">这个手提包比那个贵两百块。</span></td></tr>
+    </table></div>
+    <div class="eg" data-t="Эти брюки на три сантиметра длиннее тех.">这条裤子比那条长[三厘米]。</div>
+    <div class="warn"><span class="h">Типичные ошибки русскоговорящих</span>
+      1) Порядок, как в русском «на сто юаней дороже»: <s class="zh">比那件一百块贵</s> → <span class="zh">比那件贵一百块</span>.<br>
+      2) «Гораздо» ≠ <span class="zh">很</span>: <s class="zh">比那件很贵</s> → <span class="zh">比那件贵得多 / 贵多了</span>.<br>
+      3) <span class="zh">有点</span> — это «слегка (к сожалению)», ставится перед прилагательным и не для сравнения: <span class="zh">这件有点贵</span> «эта дороговата». После 比 — только <span class="zh">一点</span>.<br>
+      4) <span class="zh">{比较}</span> — «довольно, относительно», это не сравнение с чем-то: <s class="zh">比那条比较长</s> → <span class="zh">比那条长</span>.</div>
+
+    <div class="subhead"><span class="zh">米</span> и <span class="zh">厘米</span> — длина и рост</div>
+    <div class="tbl-wrap"><table class="cmp">
+      <tr><th>Слово</th><th>Значение</th><th>Как читать числа</th></tr>
+      <tr><td><span class="zh">米</span> mǐ</td><td>метр</td><td><span class="zh">一米五</span> — 1,5 м; <span class="zh">一米八</span> — 1,8 м; <span class="zh">一米六五</span> — 1,65 м</td></tr>
+      <tr><td><span class="zh">厘米</span> límǐ</td><td>сантиметр</td><td><span class="zh">九十厘米</span> — 90 см; <span class="zh">五十厘米</span> — 50 см</td></tr>
+      <tr><td><span class="zh">公分</span> gōngfēn</td><td>сантиметр (разг.)</td><td>в магазине и о росте: <span class="zh">高十公分</span> — выше на 10 см</td></tr>
+    </table></div>
+    <div class="eg" data-t="Этот шарф длиной 1 м 80 см.">这条围巾长[一米八]。</div>
+    <div class="eg" data-t="Его рост 1 м 80 см, он на 10 сантиметров выше меня.">他一米八，比我{高}[十公分]。</div>
+    <div class="eg" data-t="Этот шарф на 50 сантиметров длиннее того.">这条围巾比那条长[五十厘米]。</div>
+    <p style="font-size:13.5px;margin-top:8px">Порядок тот же, что с ценой: прилагательное, затем разница. Число метров «съедает» слово <span class="zh">米</span> только в середине: <span class="zh">一米八</span> — это 1,8 м, а не «один метр восемь сантиметров» (1,08 м = <span class="zh">一米零八</span>). Кстати, <span class="zh">米</span> — это ещё и «рис»: <span class="zh">买米</span> — купить рис.</p>
+    <div class="culture"><span class="ch-t">文化 · Скромность: «没有你的好看»</span>Если хвалят вашу одежду — <span class="zh">你的衣服真好看！</span> — по-китайски вежливо не соглашаться: <span class="zh">哪里哪里</span> nǎli nǎli «да что вы» или <span class="zh">没有你的好看！</span> «не такая красивая, как ваша!». Конструкция <span class="zh">没有…</span> здесь работает как ответный комплимент.</div>
+    <div class="foot">Объяснения опираются на описания сравнительных конструкций в 刘月华《实用现代汉语语法》 и 吕叔湘《现代汉语八百词》.</div>
+  </div>
+</section>
+
+<!-- ============ 1 СИТУАЦИИ ============ -->
+<section class="task" id="ex1">
+  <div class="sec-head"><div class="sec-num">一</div><h2>Ситуация → фраза</h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Посмотрите на ценники и задачу. Отметьте <b>все</b> подходящие фразы (верных может быть одна или две) и нажмите «проверить». После проверки под каждым вариантом появится объяснение.</p>
+  <div class="panel">
+    <div id="s1Wrap"></div>
+    <div class="score"><span id="s1Count"></span><div class="bar"><i id="s1Bar"></i></div><button class="btn small" id="s1Reset">сбросить</button></div>
+    <div class="culture rx"><span class="ch-t">文化 · 买家秀 и 卖家秀</span>В китайском интернете есть вечная тема — <b class="zh">买家秀</b> mǎijiā xiù «как вещь выглядит у покупателя» и <b class="zh">卖家秀</b> màijiā xiù «как она выглядит на фото продавца». Типичная подпись к таким фото: <span class="zh">买家秀不如卖家秀好看</span> — «у покупателя смотрится хуже, чем у продавца».</div>
+    <div class="shot">Пришлите скриншот выполненного упражнения</div>
+  </div>
+</section>
+
+<!-- ============ 2 РЕДАКТОР ============ -->
+<section class="task" id="ex2">
+  <div class="sec-head"><div class="sec-num">二</div><h2>Редактор: найдите ошибку</h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Студент написал фразы. Решите, верна ли каждая. Если есть ошибка — выберите правильный вариант. В конце нажмите «проверить всё».</p>
+  <div class="panel">
+    <div id="s2Wrap"></div>
+    <div class="row-btns"><button class="btn primary" id="s2Check">Проверить всё</button><button class="btn small" id="s2Reset">сбросить</button><span class="msg" id="s2Res"></span></div>
+    <div class="culture rx"><span class="ch-t">文化 · 砍价 — торг</span>На рынках одежды (например, пекинский <b class="zh">秀水街</b> Xiùshuǐ Jiē) принято торговаться — <b class="zh">砍价</b> kǎnjià, дословно «рубить цену». Самая нужная фраза — <span class="zh">便宜一点吧！</span> «Подешевле, а?», а ещё — <span class="zh">那家比你这儿便宜！</span> «Там дешевле, чем у вас!». В торговых центрах и магазинах с ценниками не торгуются.</div>
+    <div class="shot">Пришлите скриншот выполненного упражнения</div>
+  </div>
+</section>
+
+<!-- ============ 3 СБОРКА ============ -->
+<section class="task" id="ex3">
+  <div class="sec-head"><div class="sec-num">三</div><h2>Соберите фразу (с ловушками)</h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Нажимайте на слова по порядку. В наборе есть лишние слова-ловушки — их использовать не нужно. Клик по собранному слову возвращает его обратно. Счётное слово — отдельная карточка: не потеряйте!</p>
+  <div class="panel">
+    <div id="s3Wrap"></div>
+    <div class="row-btns"><button class="btn primary" id="s3Check">Проверить</button><span class="msg" id="s3Res"></span></div>
+    <div class="culture rx"><span class="ch-t">文化 · 尺码 — размеры</span>Китайские размеры обычно «маломерят»: если в России вы носите M, в Китае может понадобиться L или XL. Поэтому в магазине часто звучит: <span class="zh">有大一{号}的吗？</span> «Есть на размер больше?». Обувь меряют по европейской сетке (<span class="zh">三十八码</span> — 38-й размер) или в сантиметрах длины стопы.</div>
+    <div class="shot">Пришлите скриншот выполненного упражнения</div>
+  </div>
+</section>
+
+<!-- ============ 4 ВО СКОЛЬКО РАЗ ============ -->
+<section class="task" id="ex4">
+  <div class="sec-head"><div class="sec-num">四</div><h2>Посчитайте: на сколько?</h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Посчитайте разницу по ценникам и меркам и выберите, что поставить в пропуск: точную разницу, 一点 «чуть-чуть» или 得多 «гораздо». Неверный вариант зачёркивается — ищите дальше.</p>
+  <div class="panel">
+    <div class="calc" id="s4Wrap"></div>
+    <div class="score"><span id="s4Count"></span><div class="bar"><i id="s4Bar"></i></div><button class="btn small" id="s4Reset">сбросить</button></div>
+    <div class="culture rx"><span class="ch-t">文化 · Брюки меряют в 尺</span>Старинная мера длины <b class="zh">尺</b> chǐ (≈ 33,3 см) до сих пор живёт в магазинах: обхват талии для брюк часто называют в «чи». <span class="zh">{腰围}二尺二</span> — талия 2,2 чи, примерно 73 см. А на распродажах считают <b class="zh">打折</b>: <span class="zh">打八折</span> — платите 80 %, <span class="zh">打九折</span> — платите 90 %.</div>
+    <div class="shot">Пришлите скриншот выполненного упражнения</div>
+  </div>
+</section>
+
+<!-- ============ 5 ПЕРЕВОД ============ -->
+<section class="task" id="trans">
+  <div class="sec-head"><div class="sec-num">五</div><h2>Переведите на китайский</h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Напишите перевод иероглифами (китайская раскладка) и нажмите «проверить» — у предложения или внизу для всех сразу. Знаки препинания не важны, цифры можно писать арабскими. После проверки появится разбор: что не так, где лишнее и пропущенное и какие варианты верны. Кнопка «слова» подскажет лексику.</p>
+  <div class="panel">
+    <div id="trWrap"></div>
+    <div class="row-btns"><button class="btn primary" id="trCheck">Проверить все</button><button class="btn small" id="trReset">очистить</button><span class="msg" id="trRes"></span></div>
+    <div class="score"><span id="trCount"></span><div class="bar"><i id="trBar"></i></div></div>
+    <div class="culture rx"><span class="ch-t">文化 · «Сколько заплатили?»</span>В Китае спросить знакомого о цене его покупки — <span class="zh">多少钱买的？</span> «За сколько купил(а)?» — обычное дело, а не бестактность. Обычно за вопросом сразу следует сравнение: <span class="zh">比我的便宜多了！</span> «Гораздо дешевле, чем мой!» Так что сравнительные конструкции вы будете слышать постоянно.</div>
+    <div class="shot">Пришлите скриншот выполненного упражнения</div>
+  </div>
+</section>
+
+<!-- ============ 5 СЧЁТНЫЕ СЛОВА ============ -->
+<section class="task" id="mw" data-tr="0">
+  <div class="sec-head"><div class="sec-num">六</div><h2>Счётные слова <span class="zh">件 · 条 · 双 · 个</span></h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Часть А: разложите вещи по полкам шкафа. Часть Б: соберите, что надеть, — выберите глагол <span class="zh">穿</span> или <span class="zh">戴</span> и счётное слово (кнопки переключаются по клику).</p>
+  <div class="panel">
+    <div class="subhead" style="margin-top:0">А. Шкаф: разложите по полкам</div>
+    <p style="font-size:13.5px;margin-bottom:10px">Нажмите на вещь, затем на полку. Перевод по умолчанию скрыт — включите, если слово забылось.</p>
+    <div class="shelves" id="shelves"></div>
+    <div class="bank-head">Корзина с вещами</div>
+    <div class="sbank" id="sBank"></div>
+    <div class="score"><span id="shCount"></span><div class="bar"><i id="shBar"></i></div><span id="shErr" style="color:var(--red2)"></span><button class="btn small" id="shReset">сбросить</button></div>
+
+    <div class="subhead">Б. Что надеть? <span class="zh">穿 / 戴</span> + счётное слово</div>
+    <div id="wWrap"></div>
+    <div class="row-btns"><button class="btn primary" id="wCheck">Проверить</button><button class="btn small" id="wReset">сбросить</button><span class="msg" id="wRes"></span></div>
+    <div class="culture rx"><span class="ch-t">文化 · 条 — не только для брюк</span><b class="zh">条</b> — счётное слово для всего длинного и гибкого: <span class="zh">一条河</span> — река, <span class="zh">一条鱼</span> — рыба, <span class="zh">一条狗</span> — собака, и даже <span class="zh">一条新闻</span> — новость, <span class="zh">一条微信</span> — сообщение в WeChat (они ведь «полоской» идут в ленте).</div>
+    <div class="shot">Пришлите скриншот выполненного упражнения</div>
+  </div>
+</section>
+
+<!-- ============ 6 ПИСЬМО ============ -->
+<section class="task" id="write">
+  <div class="sec-head"><div class="sec-num">七</div><h2>Напишите сами</h2><div class="tgs"><button class="mini tg-py">拼音</button><button class="mini tg-tr">перевод</button></div></div>
+  <p class="sec-sub">Ответьте иероглифами по 1–2 предложения на каждый вопрос, используя нужную конструкцию. Здесь нет автопроверки — пришлите скриншот преподавателю. Текст сохраняется в браузере.</p>
+  <div class="panel">
+    <div id="wpWrap"></div>
+    <div class="culture rx"><span class="ch-t">文化 · 双十一 — 11 ноября</span>Через несколько дней — <b class="zh">双十一</b>, крупнейшая онлайн-распродажа в мире. Миллионы людей заранее кладут одежду в корзину и сравнивают цены: <span class="zh">双十一比平时便宜多了！</span> «На 11.11 гораздо дешевле, чем обычно!». Самое время потренировать сравнения на реальных ценниках из 淘宝 или 京东.</div>
+    <div class="shot">Пришлите скриншот выполненного упражнения</div>
+  </div>
+</section>
+
+</main>
+
+<footer>比一比 · 比 bǐ · 没有…那么 méiyǒu…nàme · 不如 bùrú · 不比 bù bǐ · 一点 yìdiǎn · 得多 de duō · 厘米 límǐ
+  <div class="cp">© 2026 Валерия и Максим. Все материалы созданы Валерией и Максимом.</div>
+</footer>
+
+<script>
+/* ========== утилиты ========== */
+const $=function(s,r){return(r||document).querySelector(s);};
+const $$=function(s,r){return[].slice.call((r||document).querySelectorAll(s));};
+const S={get:function(k,d){try{const v=localStorage.getItem("cmp_"+k);return v==null?d:JSON.parse(v);}catch(e){return d;}},
+         set:function(k,v){try{localStorage.setItem("cmp_"+k,JSON.stringify(v));}catch(e){}}};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
+const TONES={'ā':'a','á':'a','ǎ':'a','à':'a','ē':'e','é':'e','ě':'e','è':'e','ī':'i','í':'i','ǐ':'i','ì':'i','ō':'o','ó':'o','ǒ':'o','ò':'o','ū':'u','ú':'u','ǔ':'u','ù':'u','ǖ':'v','ǘ':'v','ǚ':'v','ǜ':'v','ü':'v'};
+function normPy(s){return String(s).toLowerCase().split("").map(function(c){return TONES[c]||c;}).join("").replace(/[^a-z0-9v]/g,"");}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function download(name,data,type){
+  const b=new Blob([data],{type:type||"text/plain;charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+}
+const PROG={};
+function prog(k,d,t){
+  PROG[k]=[d,t];let D=0,T=0;
+  for(const x in PROG){D+=Math.min(PROG[x][0],PROG[x][1]);T+=PROG[x][1];}
+  const p=T?Math.round(D/T*100):0;$("#pgBar").style.width=p+"%";$("#pgTxt").textContent=p+"%";
+}
+function scoreBar(cntEl,barEl,d,t,label){cntEl.textContent=(label||"")+d+" / "+t;barEl.style.width=(t?d/t*100:0)+"%";}
+
+/* ========== словарь урока ========== */
+/* [иероглиф, пиньинь, перевод, тема, счётное слово] */
+const CATS=[["chuan","穿 одежда и обувь"],["dai","戴 аксессуары"],["type","виды одежды"],["style","стиль"],["color","цвета"],["mw","счётные слова"],["gram","сравнение"],["adj","прилагательные"],["xadj","доп. прилагательные"]];
+const VOCAB=[
+["穿","chuān","надевать (одежду, обувь); быть одетым","chuan"],["脱","tuō","снимать (одежду, обувь)","chuan"],
+["裤子","kùzi","брюки","chuan","条"],["裙子","qúnzi","юбка; разг. платье","chuan","条"],["T恤","T xù","футболка","chuan","件"],
+["衬衫","chènshān","рубашка, блузка","chuan","件"],["毛衣","máoyī","свитер","chuan","件"],["外套","wàitào","куртка, верхняя одежда","chuan","件"],
+["大衣","dàyī","пальто","chuan","件"],["风衣","fēngyī","ветровка, плащ","chuan","件"],["牛仔裤","niúzǎikù","джинсы","chuan","条"],
+["短裤","duǎnkù","шорты","chuan","条"],["连衣裙","liányīqún","платье","chuan","条 / 件"],["袜子","wàzi","носки","chuan","双"],
+["鞋","xié","обувь, туфли","chuan","双"],["运动鞋","yùndòngxié","кроссовки","chuan","双"],["拖鞋","tuōxié","тапочки, шлёпанцы","chuan","双"],
+["戴","dài","надевать (аксессуары, головные уборы, очки)","dai"],["摘","zhāi","снимать (очки, шапку, украшения)","dai"],
+["帽子","màozi","шапка, шляпа","dai"],["眼镜","yǎnjìng","очки","dai","副"],["手套","shǒutào","перчатки","dai"],
+["围巾","wéijīn","шарф","dai","条"],["手表","shǒubiǎo","наручные часы","dai"],["项链","xiàngliàn","ожерелье, цепочка","dai","条"],
+["耳环","ěrhuán","серьги","dai","对"],["戒指","jièzhi","кольцо","dai"],["口罩","kǒuzhào","маска (медицинская)","dai","个"],
+["领带","lǐngdài","галстук","dai","条"],["手提包","shǒutíbāo","сумка (в руке)","dai","个"],
+["服装","fúzhuāng","одежда, костюм (общее)","type"],["正装","zhèngzhuāng","официальная одежда, деловой костюм","type","套"],
+["休闲装","xiūxiánzhuāng","повседневная одежда, кэжуал","type","套"],["运动装","yùndòngzhuāng","спортивная одежда","type","套"],
+["时尚","shíshàng","мода, стиль; модный","style"],["流行","liúxíng","популярный, модный; быть в моде","style"],["搭配","dāpèi","сочетать, комбинировать","style"],
+["风格","fēnggé","стиль","style"],["适合","shìhé","подходить, быть к лицу","style"],["试穿","shìchuān","примерять (одежду)","style"],["颜色","yánsè","цвет","style"],
+["红色","hóngsè","красный","color"],["黑色","hēisè","чёрный","color"],["白色","báisè","белый","color"],["蓝色","lánsè","синий","color"],
+["绿色","lǜsè","зелёный","color"],["黄色","huángsè","жёлтый","color"],["粉色","fěnsè","розовый","color"],["紫色","zǐsè","фиолетовый","color"],
+["灰色","huīsè","серый","color"],["橙色","chéngsè","оранжевый","color"],["棕色","zōngsè","коричневый","color"],
+["件","jiàn","сч. слово: одежда (верх тела)","mw"],["条","tiáo","сч. слово: длинное, вытянутое","mw"],["双","shuāng","пара; сч. слово для парных вещей","mw"],
+["个","gè","универсальное сч. слово","mw"],["副","fù","сч. слово: очки","mw"],
+["对","duì","пара (серьги)","mw"],["套","tào","комплект","mw"],
+["比","bǐ","чем (при сравнении); сравнивать","gram"],["没有","méiyǒu","не такой … как (в сравнении)","gram"],["那么","nàme","так, настолько (о дальнем)","gram"],
+["这么","zhème","так, настолько (о ближнем)","gram"],["不如","bùrú","уступать, быть хуже","gram"],["不比","bù bǐ","не более … чем (возражение)","gram"],
+["更","gèng","ещё более","gram"],["还","hái","ещё, даже ещё (более)","gram"],["一点","yìdiǎn","немного, чуть-чуть (после прилаг.)","gram"],
+["得多","de duō","гораздо, намного","gram"],["多了","duō le","гораздо, намного","gram"],["块","kuài","юань (разг.)","gram"],
+["米","mǐ","метр","gram"],["厘米","límǐ","сантиметр","gram"],["公分","gōngfēn","сантиметр (разг.)","gram"],
+["长","cháng","длинный","adj"],["短","duǎn","короткий","adj"],["漂亮","piàoliang","красивый","adj"],["好看","hǎokàn","красивый, симпатичный","adj"],
+["便宜","piányi","дешёвый","adj"],["贵","guì","дорогой","adj"],["暖和","nuǎnhuo","тёплый","adj"],["厚","hòu","толстый (о ткани)","adj"],
+["舒服","shūfu","удобный, комфортный","adj"],["轻","qīng","лёгкий (по весу)","adj"],["大","dà","большой","adj"],
+["好","hǎo","хороший","xadj"],["小","xiǎo","маленький","xadj"],["薄","báo","тонкий (о ткани)","xadj"],["重","zhòng","тяжёлый","xadj"],
+["新","xīn","новый","xadj"],["旧","jiù","старый, поношенный","xadj"],["高","gāo","высокий","xadj"],["矮","ǎi","низкий (ростом)","xadj"],
+["紧","jǐn","тесный, узкий (об одежде)","xadj"],["宽松","kuānsōng","свободный, широкий","xadj"],["合适","héshì","подходящий (по размеру)","xadj"],
+["难看","nánkàn","некрасивый","xadj"],["冷","lěng","холодный","xadj"]
+].map(function(a){return{c:a[0],p:a[1],r:a[2],cat:a[3],mw:a[4]||""};});
+const VMAP={};VOCAB.forEach(function(w){VMAP[w.c]=w;});
+function info(c){return VMAP[c]||{c:c,p:"",r:""};}
+
+/* слова вне фрейма: подсказка при наведении */
+const EXTRA={
+"西裤":["xīkù","классические брюки"],"皮鞋":["píxié","кожаные туфли"],"皮":["pí","кожа; кожаный"],"毛线":["máoxiàn","шерстяная пряжа"],
+"金":["jīn","золото; золотой"],"银":["yín","серебро; серебряный"],"价格":["jiàgé","цена"],"原价":["yuánjià","первоначальная цена"],
+"打":["dǎ","здесь: делать (скидку)"],"折":["zhé","1/10 цены: 打八折 — платить 80 %"],"打八折":["dǎ bā zhé","скидка 20 % (платите 80 %)"],
+"比较":["bǐjiào","довольно, относительно"],
+"号":["hào","размер (одежды)"],"腰围":["yāowéi","обхват талии"],"一样":["yíyàng","одинаковый"],"朋友":["péngyou","друг, подруга"]
+};
+VOCAB.forEach(function(w){if(w.cat==="xadj")EXTRA[w.c]=[w.p,w.r];});
+function tip(w){const e=EXTRA[w];return e?'<span class="x" tabindex="0" data-tip="'+esc(e[0]+" · "+e[1])+'">'+esc(w)+'</span>':esc(w);}
+/* разметка: {слово} — пунктир с подсказкой; [текст] — выделение */
+function rich(s){return String(s).replace(/\{([^}]+)\}/g,function(_,w){return "\u0001"+w+"\u0002";})
+  .split(/(\u0001[^\u0002]*\u0002)/).map(function(part){if(part[0]==="\u0001")return tip(part.slice(1,-1));return esc(part);}).join("")
+  .replace(/\[([^\]]+)\]/g,"<em>$1</em>");}
+function plain(s){return String(s).replace(/[{}\[\]]/g,"");}
+
+/* ========== автоматический пиньинь (по словам) ========== */
+const PYD={
+"这":"zhè","那":"nà","这个":"zhège","那个":"nàge","这件":"zhè jiàn","那件":"nà jiàn","这条":"zhè tiáo","那条":"nà tiáo","这双":"zhè shuāng","那双":"nà shuāng",
+"件":"jiàn","条":"tiáo","双":"shuāng","个":"gè","副":"fù","块":"kuài","对":"duì","套":"tào","一点多":"yìdiǎn duō",
+"一件":"yí jiàn","一条":"yì tiáo","一双":"yì shuāng","一个":"yí ge","一套":"yí tào","两件":"liǎng jiàn","两条":"liǎng tiáo","两双":"liǎng shuāng",
+"比":"bǐ","没有":"méiyǒu","那么":"nàme","这么":"zhème","不如":"bùrú","不比":"bù bǐ","更":"gèng","还":"hái","很":"hěn","非常":"fēicháng","太":"tài",
+"一点":"yìdiǎn","一些":"yìxiē","有点":"yǒudiǎn","得多":"de duō","多了":"duō le","很多":"hěn duō","的":"de","是":"shì","了":"le","吧":"ba","吗":"ma",
+"不":"bù","不贵":"bú guì","不是":"bú shì","没":"méi","我":"wǒ","你":"nǐ","他":"tā","她":"tā","它":"tā","想":"xiǎng","现在":"xiànzài","朋友":"péngyou",
+"米":"mǐ","厘米":"límǐ","公分":"gōngfēn",
+"一":"yī","两":"liǎng","二":"èr","三":"sān","四":"sì","五":"wǔ","六":"liù","七":"qī","八":"bā","九":"jiǔ","十":"shí","十五":"shíwǔ","三十":"sānshí","五十":"wǔshí",
+"一百":"yìbǎi","两百":"liǎngbǎi","四百":"sìbǎi","四十厘米":"sìshí límǐ","五百":"wǔbǎi","一百六":"yìbǎi liù","一百二":"yìbǎi èr","四十":"sìshí","八十":"bāshí",
+"一米":"yì mǐ","一米五":"yì mǐ wǔ","一米八":"yì mǐ bā","一米六五":"yì mǐ liù wǔ","一米二":"yì mǐ èr",
+"六十六":"liùshíliù","三十三":"sānshísān","九十九":"jiǔshíjiǔ","六十":"liùshí","一千二百":"yìqiān èrbǎi","三百":"sānbǎi","一百":"yìbǎi","十块":"shí kuài","五十块":"wǔshí kuài","一千":"yìqiān","两千":"liǎngqiān","九百":"jiǔbǎi","三千":"sānqiān","两千九":"liǎngqiān jiǔ","打八折":"dǎ bā zhé","打":"dǎ","折":"zhé","原价":"yuánjià","价格":"jiàgé",
+"西裤":"xīkù","皮鞋":"píxié","皮":"pí","毛线":"máoxiàn","金":"jīn","银":"yín","比较":"bǐjiào","号":"hào","一样":"yíyàng"
+};
+VOCAB.forEach(function(w){if(!PYD[w.c])PYD[w.c]=w.p;});
+const PUN={"。":".","，":",","！":"!","？":"?","：":":","、":",","—":"—","…":"…"};
+function pinyin(s){
+  s=plain(s);let out=[],i=0,cap=true;
+  while(i<s.length){
+    const ch=s[i];
+    if(PUN[ch]){if(out.length)out[out.length-1]+=PUN[ch];else out.push(PUN[ch]);if(/[.!?]/.test(PUN[ch]))cap=true;i++;continue;}
+    if(/\s/.test(ch)){i++;continue;}
+    let hit=null;
+    for(let L=Math.min(6,s.length-i);L>0;L--){const w=s.substr(i,L);if(PYD[w]!=null){hit=w;break;}}
+    let p;
+    if(hit){p=PYD[hit];i+=hit.length;}
+    else if(/[A-Za-z0-9¥.,%]/.test(ch)){let j=i;while(j<s.length&&/[A-Za-z0-9¥.,%]/.test(s[j]))j++;p=s.slice(i,j);i=j;}
+    else{p="?";i++;if(window.__pyMiss)window.__pyMiss.push(ch);}
+    if(cap&&p){p=p.charAt(0).toUpperCase()+p.slice(1);cap=false;}
+    out.push(p);
+  }
+  return out.join(" ").replace(/ ([,.!?:])/g,"$1");
+}
+function zhBlock(s,tr){return '<span class="c">'+rich(s)+'</span><span class="py">'+esc(pinyin(s))+'</span>'+(tr?'<span class="tr">'+esc(tr)+'</span>':"");}
+
+/* ========== штраф 罚 ========== */
+let FA=S.get("fa",0);
+function faShow(){$("#faN").textContent=FA;}
+function penalize(host,text){
+  FA++;S.set("fa",FA);faShow();
+  const b=$("#faBox");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");
+  if(host){
+    host.classList.add("rel");
+    let st=$(":scope > .fa-stamp",host);
+    if(!st){st=document.createElement("div");st.className="fa-stamp";host.appendChild(st);}
+    st.innerHTML='罚<small>'+esc(text||"счётное слово!")+'</small>';
+    st.classList.remove("go");void st.offsetWidth;st.classList.add("go");
+  }
+}
+faShow();
+
+/* ========== переключатели 拼音 / перевод ========== */
+const TG={};
+function applyTg(sec){
+  const st=TG[sec.id];
+  sec.classList.toggle("nopy",!st.py);sec.classList.toggle("notr",!st.tr);
+  $(".tg-py",sec).classList.toggle("on",st.py);$(".tg-tr",sec).classList.toggle("on",st.tr);
+  S.set("tg_"+sec.id,st);syncGlobal();
+}
+function syncGlobal(){
+  const v=Object.keys(TG).map(function(k){return TG[k];});
+  $("#gPy").classList.toggle("on",v.every(function(s){return s.py;}));
+  $("#gTr").classList.toggle("on",v.every(function(s){return s.tr;}));
+}
+$$("section.task").forEach(function(sec){
+  TG[sec.id]=S.get("tg_"+sec.id,{py:sec.dataset.py!=="0",tr:sec.dataset.tr!=="0"});
+  $(".tg-py",sec).onclick=function(){TG[sec.id].py=!TG[sec.id].py;applyTg(sec);};
+  $(".tg-tr",sec).onclick=function(){TG[sec.id].tr=!TG[sec.id].tr;applyTg(sec);};
+  applyTg(sec);
+});
+["py","tr"].forEach(function(k){
+  $(k==="py"?"#gPy":"#gTr").onclick=function(){
+    const val=!this.classList.contains("on");
+    $$("section.task").forEach(function(sec){TG[sec.id][k]=val;applyTg(sec);});
+  };
+});
+$("#gPrint").onclick=function(){window.print();};
+$("#gReset").onclick=function(){
+  if(!confirm("Сбросить все ответы, штрафы, карточки и тексты? Добавленные слова и избранное тоже удалятся."))return;
+  try{Object.keys(localStorage).forEach(function(k){if(k.indexOf("cmp_")===0)localStorage.removeItem(k);});}catch(e){}
+  location.reload();
+};
+/* тап по пунктиру на телефоне */
+document.addEventListener("click",function(e){
+  const x=e.target.closest&&e.target.closest(".x");
+  $$(".x.open").forEach(function(o){if(o!==x)o.classList.remove("open");});
+  if(x)x.classList.toggle("open");
+});
+
+/* ========== фон: ягоды ========== */
+(function(){
+  const box=$("#berries");
+  for(let i=0;i<11;i++){
+    const s=document.createElement("span");s.className="berry";const sz=8+Math.random()*16;
+    s.style.cssText="left:"+(Math.random()*100)+"%;width:"+sz+"px;height:"+sz+"px;--dx:"+(Math.random()*120-60)+"px;animation-duration:"+(38+Math.random()*30)+"s;animation-delay:-"+(Math.random()*60)+"s";
+    box.appendChild(s);
+  }
+})();
+
+/* ========== статичная разметка: пунктир и примеры ========== */
+$$(".rx").forEach(function(el){
+  const walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null);const nodes=[];let n;
+  while((n=walk.nextNode()))if(/\{[^}]+\}/.test(n.nodeValue)&&!n.parentNode.closest(".eg"))nodes.push(n);
+  nodes.forEach(function(t){const sp=document.createElement("span");sp.innerHTML=rich(t.nodeValue);t.parentNode.replaceChild(sp,t);});
+});
+$$(".eg").forEach(function(el){
+  const who=$(".who",el);const whoHtml=who?who.outerHTML:"";if(who)who.remove();
+  const s=el.textContent.trim();
+  el.innerHTML='<span class="c">'+whoHtml+rich(s)+'</span><span class="py">'+esc(pinyin(s))+'</span><span class="tr">'+esc(el.dataset.t||"")+'</span>';
+});
+(function(){
+  const P=[["长","短"],["贵","便宜"],["厚","薄"],["轻","重"],["大","小"],["漂亮","难看"],["好看","难看"],["暖和","冷"],["舒服",null],["好",null],["新","旧"],["高","矮"],["紧","宽松"],["合适",null]];
+  const box=$("#adjPairs");
+  function w(c){const v=info(c);const ex=v.cat==="xadj";
+    return '<div class="w">'+(ex?tip(c):esc(c))+'<small class="py">'+esc(v.p)+'</small><small class="tr">'+esc(v.r)+'</small></div>';}
+  P.forEach(function(p){const d=document.createElement("div");d.className="pair";d.innerHTML=w(p[0])+(p[1]?'<span class="dash">↔</span>'+w(p[1]):"");box.appendChild(d);});
+})();
+
+/* ========== 词 СЛОВАРЬ + КАРТОЧКИ ========== */
+(function(){
+  let stars=S.get("star",{}),imp=S.get("imp",[]),onlyStar=false,cat="all";
+  function all(){return VOCAB.concat(imp.map(function(w){return{c:w.c,p:w.p,r:w.r,cat:"imp",mw:"",imp:true};}));}
+  const list=$("#dList"),search=$("#dSearch"),msg=$("#dMsg"),cats=$("#dCats");
+  [["all","все"]].concat(CATS).concat([["imp","добавленные"]]).forEach(function(c){
+    const b=document.createElement("button");b.className="cat"+(c[0]==="all"?" on":"");b.textContent=c[1];b.dataset.k=c[0];
+    b.onclick=function(){cat=c[0];$$(".cat",cats).forEach(function(x){x.classList.toggle("on",x===b);});render();};cats.appendChild(b);
+  });
+  function inCat(w){return cat==="all"||w.cat===cat;}
+  function render(){
+    const q=search.value.trim().toLowerCase(),qp=normPy(q);
+    list.innerHTML="";
+    all().forEach(function(w){
+      if(onlyStar&&!stars[w.c])return;
+      if(!inCat(w))return;
+      if(q&&!(w.c.indexOf(q)>=0||(qp&&normPy(w.p).indexOf(qp)>=0)||w.r.toLowerCase().indexOf(q)>=0))return;
+      const d=document.createElement("div");d.className="dcard"+(w.imp?" imp":"")+(w.cat==="xadj"?" xa":"");
+      d.innerHTML='<button class="star'+(stars[w.c]?" on":"")+'" title="В избранное">★</button>'+
+        '<div><div class="dc">'+esc(w.c)+'</div><span class="meta py">'+esc(w.p)+'</span><span class="meta tr">'+esc(w.r)+'</span></div>'+
+        (w.mw?'<span class="mwb" title="счётное слово">'+esc(w.mw)+'</span>':'<span></span>');
+      $(".star",d).onclick=function(){stars[w.c]=!stars[w.c];if(!stars[w.c])delete stars[w.c];S.set("star",stars);this.classList.toggle("on",!!stars[w.c]);if(onlyStar)render();};
+      list.appendChild(d);
+    });
+    if(!list.children.length)list.innerHTML='<div class="tr" style="display:block;padding:8px">Ничего не найдено.</div>';
+  }
+  search.oninput=render;
+  $("#dStar").onclick=function(){onlyStar=!onlyStar;this.classList.toggle("primary",onlyStar);render();};
+  function rows(){return all().map(function(w){return{c:w.c,p:w.p,r:w.r+(w.mw?" [сч. сл. "+w.mw+"]":"")};});}
+  $("#dCsv").onclick=function(){download("fuzhuang_bijiao.csv","﻿hanzi,pinyin,ru\n"+rows().map(function(w){return[w.c,'"'+w.p+'"','"'+w.r.replace(/"/g,'""')+'"'].join(",");}).join("\n"),"text/csv;charset=utf-8");};
+  $("#dAnki").onclick=function(){download("fuzhuang_bijiao_anki.txt",rows().map(function(w){return w.c+"\t"+w.p+"\t"+w.r;}).join("\n"));};
+  $("#dJson").onclick=function(){download("fuzhuang_bijiao.json",JSON.stringify(rows(),null,2),"application/json");};
+  function splitLine(l){
+    const sep=l.indexOf("\t")>=0?"\t":(l.indexOf(";")>=0?";":",");
+    const out=[];let cur="",q=false;
+    for(let i=0;i<l.length;i++){const ch=l[i];
+      if(ch==='"'){if(q&&l[i+1]==='"'){cur+='"';i++;}else q=!q;}
+      else if(ch===sep&&!q){out.push(cur);cur="";}else cur+=ch;}
+    out.push(cur);return out.map(function(s){return s.trim();});
+  }
+  $("#dImp").onchange=function(){
+    const f=this.files[0];if(!f)return;const rd=new FileReader();
+    rd.onload=function(){
+      let rs=[];const txt=String(rd.result).replace(/^﻿/,"");
+      try{
+        if(txt.trim()[0]==="["){rs=JSON.parse(txt).map(function(o){return{c:o.c||o.hanzi||o["汉字"]||"",p:o.p||o.pinyin||"",r:o.r||o.ru||o.translation||""};});}
+        else rs=txt.split(/\r?\n/).filter(function(l){return l.trim();}).map(splitLine).map(function(a){return{c:a[0]||"",p:a[1]||"",r:a.slice(2).join(", ")};});
+      }catch(e){msg.className="msg bad";msg.textContent="Файл не прочитан: "+e.message;return;}
+      const have={};all().forEach(function(w){have[w.c]=1;});let n=0;
+      rs.forEach(function(w){if(/[㐀-鿿]/.test(w.c)&&!have[w.c]){imp.push(w);have[w.c]=1;n++;}});
+      S.set("imp",imp);msg.className="msg ok";msg.textContent="Добавлено слов: "+n;render();
+    };
+    rd.readAsText(f,"utf-8");this.value="";
+  };
+  $("#dImpClear").onclick=function(){imp=[];S.set("imp",imp);msg.className="msg";msg.textContent="Добавленные слова убраны";render();};
+  render();
+
+  /* карточки */
+  let box=S.get("box",{}),deck=[],pos=0;
+  const card=$("#fcCard"),front=$("#fcFront"),back=$("#fcBack"),inf=$("#fcInfo"),kn=$("#fcKnow"),ag=$("#fcAgain");
+  function learned(){return all().filter(function(w){return(box[w.c]||0)>=3;}).length;}
+  function stat(){return "выучено (3 «знаю» подряд): "+learned()+" / "+all().length;}
+  inf.textContent=stat();
+  function show(){
+    card.classList.remove("flip");
+    if(pos>=deck.length){
+      front.innerHTML='<div class="mid">Сессия окончена 🍒</div><div class="hint">'+stat()+'</div>';back.innerHTML="";
+      kn.disabled=ag.disabled=true;inf.textContent=stat();return;
+    }
+    const w=deck[pos],dir=$("#fcDir").value,hint=$("#fcHint").checked,mw=$("#fcMw").checked&&w.mw;
+    const zh='<div class="big">'+esc(w.c)+'</div>',py='<div class="mid" style="color:var(--bluei)">'+esc(w.p)+'</div>',ru='<div class="mid">'+esc(w.r)+'</div>';
+    const mwb=mw?'<div class="hint">счётное слово: <span class="mwb">'+esc(w.mw)+'</span></div>':"";
+    if(dir==="zh"){front.innerHTML=zh+(hint?py:"")+'<div class="hint">нажмите, чтобы перевернуть</div>';back.innerHTML=zh+py+ru+mwb;}
+    else if(dir==="ru"){front.innerHTML=ru+'<div class="hint">вспомните иероглифы и нажмите</div>';back.innerHTML=zh+py+ru+mwb;}
+    else{front.innerHTML='<div class="big" style="font-family:var(--sans);font-size:38px;color:var(--bluei)">'+esc(w.p)+'</div><div class="hint">какой это иероглиф?</div>';back.innerHTML=zh+py+ru+mwb;}
+    kn.disabled=ag.disabled=false;
+    inf.textContent="карточка "+(pos+1)+" / "+deck.length+" · "+stat();
+  }
+  $("#fcStart").onclick=function(){
+    const src=$("#fcSrc").value;let ws=all();
+    if(src==="star")ws=ws.filter(function(w){return stars[w.c];});
+    if(src==="new")ws=ws.filter(function(w){return(box[w.c]||0)<3;});
+    if(src==="cat")ws=ws.filter(inCat);
+    if(!ws.length){front.innerHTML='<div class="mid">Нет слов для этого режима</div><div class="hint">'+(src==="star"?"отметьте слова звёздочкой в словаре":"выберите другую тему или режим")+'</div>';back.innerHTML="";return;}
+    if($("#fcShuf").checked)ws=shuffle(ws);
+    deck=ws.slice(0,+$("#fcN").value).map(function(w){return{c:w.c,p:w.p,r:w.r,mw:w.mw};});pos=0;show();
+  };
+  card.onclick=function(e){if(e.target.closest(".x"))return;if(deck.length&&pos<deck.length)card.classList.toggle("flip");};
+  kn.onclick=function(){const w=deck[pos];box[w.c]=Math.min((box[w.c]||0)+1,5);S.set("box",box);pos++;show();};
+  ag.onclick=function(){const w=deck[pos];box[w.c]=0;S.set("box",box);if(!w.again){w.again=true;deck.push(w);}pos++;show();};
+})();
+
+/* ========== 一 СИТУАЦИИ ========== */
+/* tags: [предмет, значение]; opts: [фраза, верно?, пояснение, тип ошибки: mw — нет сч. слова, mww — не то сч. слово] */
+const E1=[
+ {tags:[["这件毛衣","¥300"],["那件毛衣","¥200"]],ru:"Скажите, что этот свитер на 100 юаней дороже.",opts:[
+  ["这件毛衣比那件贵一百块。",1,"Разница стоит после прилагательного."],
+  ["这件毛衣比那件一百块贵。",0,"Число не ставят перед прилагательным, как в русском «на 100 юаней дороже». Сначала 贵, потом 一百块."],
+  ["这毛衣比那贵一百块。",0,"Пропущено счётное слово: нужно 这件毛衣 и 比那件.","mw"],
+  ["这件毛衣比那件很贵一百块。",0,"После 比 нельзя 很."]]},
+ {tags:[["这条裙子","¥80"],["那条裙子","¥200"]],ru:"Скажите спокойно, без спора: эта юбка не такая дорогая, как та.",opts:[
+  ["这条裙子没有那条那么贵。",1,"没有…那么 — нейтральное «не такой…, как»."],
+  ["这条裙子没有那条贵。",1,"那么 можно опустить."],
+  ["这条裙子比那条不贵。",0,"Отрицание внутрь 比 не ставят. «Не такой дорогой» = 没有…贵."],
+  ["这条裙子不比那条贵。",0,"不比 — это возражение «вовсе не дороже». Спора здесь нет, поэтому нужен 没有."]]},
+ {tags:[["运动鞋","★★★★★"],["{皮鞋}","★★"]],ru:"Скажите в общем (не о конкретной паре): кроссовки гораздо удобнее кожаных туфель.",opts:[
+  ["运动鞋比{皮鞋}舒服得多。",1,"Это обобщение — без 这/那, поэтому счётное слово не нужно."],
+  ["运动鞋比{皮鞋}舒服多了。",1,"多了 = 得多 — «гораздо»."],
+  ["运动鞋比{皮鞋}很舒服。",0,"很 ≠ «гораздо». После 比 很 не ставят."],
+  ["运动鞋比{皮鞋}舒服一点。",0,"一点 — «чуть-чуть», а нужно «гораздо»."]]},
+ {tags:[["{朋友}：","你的围巾太长了！"]],ru:"Подруга говорит, что ваш шарф слишком длинный. Возразите: «Мой шарф вовсе не длиннее твоего!»",opts:[
+  ["我的围巾不比你的长！",1,"不比 — как раз для возражения."],
+  ["我的围巾比你的不长！",0,"Отрицание внутрь 比 не ставят."],
+  ["我的围巾没有你的那么长。",0,"Грамматически верно, но это не возражение, а утверждение «мой шарф короче твоего»."],
+  ["我的条围巾不比你的长！",0,"После 的 счётное слово не ставят: 我的围巾 или 我这条围巾.","mww"]]},
+ {tags:[["这件大衣","¥1000"],["那件风衣","¥500"]],ru:"Скажите, что пальто гораздо дороже ветровки.",opts:[
+  ["这件大衣比那件风衣贵多了。",1,"多了 после прилагательного — «гораздо»."],
+  ["这件大衣比那件风衣贵得多。",1,"得多 = 多了."],
+  ["这件大衣比那件风衣很贵。",0,"很 ≠ «гораздо». После 比 很 не ставят."],
+  ["这大衣比那风衣贵多了。",0,"Пропущены счётные слова: 这件大衣, 那件风衣.","mw"]]},
+ {tags:[["这个手提包","¥600"],["那个手提包","¥580"]],ru:"Скажите, что эта сумка чуть дороже той.",opts:[
+  ["这个手提包比那个贵一点。",1,"一点 после прилагательного — «немного, чуть-чуть»."],
+  ["这个手提包比那个贵一些。",1,"一些 = 一点."],
+  ["这个手提包比那个有点贵。",0,"有点 значит «слегка (к сожалению)», стоит перед прилагательным и с 比 не сочетается."],
+  ["这手提包比那个贵一点。",0,"Пропущено счётное слово: 这个手提包.","mw"]]},
+ {tags:[["这双拖鞋","¥50"],["那双运动鞋","¥100"]],ru:"Скажите, что тапочки на 50 юаней дешевле кроссовок.",opts:[
+  ["这双拖鞋比那双运动鞋便宜五十块。",1,"Точная разница стоит после прилагательного."],
+  ["这双拖鞋比那双运动鞋五十块便宜。",0,"Число не ставят перед прилагательным: сначала 便宜, потом 五十块."],
+  ["这双拖鞋没有那双运动鞋便宜五十块。",0,"После 没有 разницу не добавляют. Точная разница — только с 比."],
+  ["这条拖鞋比那条运动鞋便宜五十块。",0,"Обувь — это пара: счётное слово 双.","mww"]]},
+ {tags:[["这条围巾","1,5 м"],["那条围巾","1,2 м"]],ru:"Скажите, что этот шарф на 30 сантиметров длиннее.",opts:[
+  ["这条围巾比那条长三十厘米。",1,"Всё верно."],
+  ["这条围巾比那条长三十公分。",1,"公分 = 厘米 в разговорной речи."],
+  ["这条围巾比那条三十厘米长。",0,"Разница ставится после прилагательного."],
+  ["这个围巾比那个长三十厘米。",0,"Шарф — длинная вещь, счётное слово 条.","mww"]]},
+ {tags:[["这条短裤","舒服 ★★"],["那条牛仔裤","舒服 ★★★★"]],ru:"Скажите, что эти шорты уступают тем джинсам по удобству.",opts:[
+  ["这条短裤不如那条牛仔裤舒服。",1,"不如 — «уступает»."],
+  ["这条短裤没有那条牛仔裤那么舒服。",1,"Смысл тот же, оттенок нейтральнее."],
+  ["这双短裤不如那双牛仔裤舒服。",0,"Шорты и джинсы — одна вещь, а не пара: 条.","mww"],
+  ["这条短裤不如那条牛仔裤舒服一点。",0,"После 不如 и 没有 разницу (一点, 得多, число) не добавляют."]]},
+ {tags:[["这个口罩","L"],["那个口罩","M"]],ru:"Скажите, что эта маска немного больше той.",opts:[
+  ["这个口罩比那个大一点。",1,"一点 после прилагательного — «немного»."],
+  ["这个口罩比那个大一些。",1,"一些 = 一点."],
+  ["这个口罩比那个有点大。",0,"有点 значит «слегка (к сожалению)», стоит перед прилагательным и с 比 не сочетается."],
+  ["这个口罩一点比那个大。",0,"一点 ставится после прилагательного."]]}
+];
+(function(){
+  let st=S.get("s1",{});const wrap=$("#s1Wrap");
+  E1.forEach(function(it,i){
+    const d=document.createElement("div");d.className="sit";
+    const tags=it.tags.map(function(t){return '<span class="ptag"><span class="zh">'+rich(t[0])+'</span><span class="v">'+rich(t[1])+'</span></span>';}).join("");
+    d.innerHTML='<div class="top"><span class="num">'+(i+1)+'</span><div class="tags">'+tags+'</div><div class="task-ru">'+esc(it.ru)+'</div></div><div class="opts"></div>'+
+      '<div class="foot2"><button class="btn small primary chk">проверить</button><button class="btn small again" style="display:none">ещё раз</button><span class="msg"></span></div>';
+    wrap.appendChild(d);
+    const ob=$(".opts",d),msg=$(".msg",d);
+    const order=st[i]&&st[i].order||shuffle(it.opts.map(function(_,k){return k;}));
+    let sel=st[i]&&st[i].sel||[];
+    order.forEach(function(k){
+      const o=it.opts[k],b=document.createElement("button");b.className="opt";b.dataset.k=k;
+      b.innerHTML=zhBlock(o[0])+'<span class="note">'+esc(o[2]||"")+'</span>';
+      b.onclick=function(e){if(e.target.closest(".x"))return;if(d.classList.contains("done"))return;
+        const ix=sel.indexOf(k);if(ix>=0)sel.splice(ix,1);else sel.push(k);paint();save();};
+      ob.appendChild(b);
+    });
+    function save(extra){st[i]=Object.assign({order:order,sel:sel},extra||{});S.set("s1",st);}
+    function paint(){$$(".opt",ob).forEach(function(b){b.classList.toggle("sel",sel.indexOf(+b.dataset.k)>=0);});}
+    function judge(withPenalty){
+      const right=it.opts.map(function(o,k){return o[1]?k:-1;}).filter(function(k){return k>=0;});
+      const ok=right.length===sel.length&&right.every(function(k){return sel.indexOf(k)>=0;});
+      d.classList.add("done");d.classList.toggle("ok",ok);d.classList.toggle("bad",!ok);
+      $$(".opt",ob).forEach(function(b){const k=+b.dataset.k,isR=!!it.opts[k][1],isS=sel.indexOf(k)>=0;
+        b.classList.remove("sel");b.classList.toggle("right",isR&&isS);b.classList.toggle("wrong",!isR&&isS);b.classList.toggle("miss",isR&&!isS);});
+      const mwErr=sel.filter(function(k){return it.opts[k][3];});
+      if(withPenalty&&mwErr.length)penalize(d,it.opts[mwErr[0]][3]==="mw"?"забыто счётное слово":"не то счётное слово");
+      msg.className="msg "+(ok?"ok":"bad");msg.textContent=ok?"对了！":"Есть ошибка — прочитайте пояснения."+(mwErr.length?" 罚 за счётное слово!":"");
+      $(".chk",d).style.display="none";$(".again",d).style.display=ok?"none":"";
+      return ok;
+    }
+    $(".chk",d).onclick=function(){if(!sel.length){msg.className="msg bad";msg.textContent="Отметьте хотя бы один вариант.";return;}const ok=judge(true);save({done:1,ok:ok?1:0});score();};
+    $(".again",d).onclick=function(){d.classList.remove("done","ok","bad");sel=[];$$(".opt",ob).forEach(function(b){b.classList.remove("right","wrong","miss");});paint();
+      $(".chk",d).style.display="";this.style.display="none";msg.textContent="";save({});score();};
+    paint();
+    if(st[i]&&st[i].done)judge(false);
+  });
+  function score(){const n=E1.filter(function(_,i){return st[i]&&st[i].ok;}).length;scoreBar($("#s1Count"),$("#s1Bar"),n,E1.length,"верно: ");prog("s1",n,E1.length);}
+  $("#s1Reset").onclick=function(){S.set("s1",{});wrap.innerHTML="";st={};location.hash="#ex1";location.reload();};
+  score();
+})();
+
+/* ========== 二 РЕДАКТОР ========== */
+/* [фраза, верна?, варианты исправления [[фраза, верно?]], объяснение, перевод, нет сч. слова?] */
+const E2=[
+ ["这件衬衫比那件很漂亮。",0,[["这件衬衫比那件漂亮多了。",1],["这件衬衫很比那件漂亮。",0],["这件衬衫比那件更很漂亮。",0]],"После 比 не ставят 很. «Гораздо» — 多了 / 得多, «ещё более» — 更.","Эта рубашка гораздо красивее той."],
+ ["这条牛仔裤比那条长五厘米。",1,null,"Всё верно: разница после прилагательного, 条 на месте.","Эти джинсы на 5 см длиннее тех."],
+ ["我的毛衣比你的不暖和。",0,[["我的毛衣没有你的暖和。",1],["我的毛衣比你的没暖和。",0],["我的毛衣不比你的不暖和。",0]],"Отрицание внутрь 比 не ставят. «Не такой тёплый, как» = 没有.","Мой свитер не такой тёплый, как твой."],
+ ["这双袜子比那厚。",0,[["这双袜子比那双厚。",1],["这袜子比那双厚。",0],["这双袜子比那个厚。",0]],"Существительное после 那 можно опустить, а счётное слово — нет: 比那双.","Эти носки толще тех.",1],
+ ["这件外套没有那件贵五十块。",0,[["这件外套比那件贵五十块。",1],["这件外套没有那件五十块贵。",0],["这件外套不比那件贵五十块。",0]],"После 没有 точную разницу не ставят. «На 50 юаней дороже/дешевле» — только с 比.","Эта куртка на 50 юаней дороже той."],
+ ["这条领带没有那条好看一点。",0,[["这条领带没有那条好看。",1],["这条领带没有那条好看得多。",0],["这条领带比那条没有好看。",0]],"После 没有 и 不如 разницу (一点, 得多, число) не добавляют.","Этот галстук не такой красивый, как тот."],
+ ["我的外套没有你的那么厚。",1,null,"Всё верно: после 的 счётное слово не нужно.","Моя куртка не такая толстая, как твоя."],
+ ["这个口罩比那个舒服。",1,null,"Всё верно.","Эта маска удобнее той."],
+ ["这条裙子不如那条难看。",0,[["这条裙子不如那条好看。",1],["这条裙子不如那条很难看。",0],["这条裙子不如那条难看一点。",0]],"不如 используют с желательным качеством: «уступает по красоте» = 不如…好看.","Эта юбка смотрится хуже той."],
+ ["这件T恤比那件三十块便宜。",0,[["这件T恤比那件便宜三十块。",1],["这件T恤三十块比那件便宜。",0],["这T恤比那件便宜三十块。",0]],"Разница стоит после прилагательного: 便宜三十块.","Эта футболка на 30 юаней дешевле той."],
+ ["他比我{高}十公分。",1,null,"Всё верно: 公分 — разговорное «сантиметр».","Он на 10 см выше меня."],
+ ["这双运动鞋比那双更轻。",1,null,"Всё верно: 更 перед прилагательным можно.","Эти кроссовки ещё легче тех."],
+ ["这条项链比那条{比较}长。",0,[["这条项链比那条长。",1],["这条项链{比较}比那条长。",0],["这条项链比那条很长。",0]],"比较 — «довольно, относительно», в конструкции с 比 оно лишнее.","Эта цепочка длиннее той."],
+ ["这双袜子比那双厚得多。",1,null,"Всё верно: 得多 после прилагательного — «гораздо».","Эти носки гораздо толще тех."]
+];
+(function(){
+  let st=S.get("s2",{});const wrap=$("#s2Wrap");
+  E2.forEach(function(e,i){
+    const d=document.createElement("div");d.className="ed";
+    const rec=st[i]||{};
+    const fixes=e[2]?(rec.order||shuffle(e[2].map(function(_,k){return k;}))):[];
+    d.innerHTML='<div class="row1"><span class="num">'+(i+1)+'</span><div class="s">'+zhBlock(e[0],e[4])+'</div>'+
+      '<div class="judge"><button class="jb" data-v="1">✓ верно</button><button class="jb" data-v="0">✗ ошибка</button></div></div>'+
+      '<div class="fix"><div class="lab">Выберите исправленный вариант:</div><div class="fixopts"></div></div>'+
+      '<div class="expl"></div>';
+    wrap.appendChild(d);
+    const fo=$(".fixopts",d);
+    if(e[2])fixes.forEach(function(k){const b=document.createElement("button");b.className="fo";b.dataset.k=k;b.innerHTML=zhBlock(e[2][k][0]);
+      b.onclick=function(ev){if(ev.target.closest(".x"))return;if(d.classList.contains("checked"))return;rec.fix=k;save();paint();};fo.appendChild(b);});
+    $$(".jb",d).forEach(function(b){b.onclick=function(){if(d.classList.contains("checked"))return;rec.j=+b.dataset.v;if(rec.j===1)delete rec.fix;save();paint();};});
+    function save(){rec.order=fixes;st[i]=rec;S.set("s2",st);}
+    function paint(){
+      $$(".jb",d).forEach(function(b){b.classList.toggle("sel",rec.j===+b.dataset.v);});
+      $(".fix",d).classList.toggle("show",rec.j===0&&!!e[2]);
+      $$(".fo",d).forEach(function(b){b.classList.toggle("sel",rec.fix===+b.dataset.k);});
+    }
+    d._ok=function(){if(rec.j===undefined)return false;if(e[1])return rec.j===1;return rec.j===0&&rec.fix!==undefined&&e[2][rec.fix][1]===1;};
+    d._check=function(withPen){
+      d.classList.add("checked");const ok=d._ok();d.classList.toggle("ok",ok);d.classList.toggle("bad",!ok);
+      const ex=$(".expl",d);ex.style.color=ok?"var(--ok)":"var(--red2)";
+      if(!e[1]&&e[2]){$(".fix",d).classList.add("show");$$(".fo",d).forEach(function(b){const k=+b.dataset.k;b.classList.remove("sel");b.classList.toggle("right",e[2][k][1]===1);b.classList.toggle("wrong",rec.fix===k&&e[2][k][1]!==1);});}
+      ex.innerHTML=(ok?"✓ ":"✗ ")+rich(e[3]);
+      const noMw=/(这|那)(?![件条双个副么])/;
+      if(withPen&&e[5]&&rec.j===1)penalize(d,"не заметили пропуск");
+      else if(withPen&&!e[1]&&rec.j===0&&rec.fix!==undefined&&e[2][rec.fix][1]!==1&&noMw.test(plain(e[2][rec.fix][0])))penalize(d,"забыто счётное слово");
+      return ok;
+    };
+    paint();if(rec.checked)d._check(false);
+  });
+  function score(){const items=$$(".ed",wrap);const n=items.filter(function(d){return d._ok();}).length;prog("s2",n,E2.length);return n;}
+  $("#s2Check").onclick=function(){
+    const items=$$(".ed",wrap);let empty=0;
+    items.forEach(function(d,i){if(st[i]&&st[i].j!==undefined){st[i].checked=1;d._check(true);}else empty++;});
+    S.set("s2",st);const n=score();const r=$("#s2Res");
+    r.className="msg "+(n===E2.length?"ok":"bad");
+    r.textContent=n===E2.length?"太棒了！Все ошибки найдены 🍒":"Верно: "+n+" из "+E2.length+(empty?" · без ответа: "+empty:"")+". Прочитайте объяснения.";
+  };
+  $("#s2Reset").onclick=function(){S.set("s2",{});location.hash="#ex2";location.reload();};
+  score();
+})();
+
+/* ========== 三 СБОРКА С ЛОВУШКАМИ ========== */
+/* ru, t — верный порядок, x — ловушки, acc — другие верные варианты, adj — прилагательное (для проверки порядка) */
+const MWS=["件","条","双","个","副"];
+const E3=[
+ {ru:"Эти брюки на 3 сантиметра длиннее тех.",t:["这","条","裤子","比","那","条","长","三","厘米"],x:["件","很"],adj:"长"},
+ {ru:"Эта футболка гораздо дешевле той.",t:["这","件","T恤","比","那","件","便宜","得多"],x:["条","很"],adj:"便宜"},
+ {ru:"Эти носки не такие тёплые, как те.",t:["这","双","袜子","没有","那","双","那么","暖和"],x:["比","个"],acc:["这双袜子没有那双暖和"],adj:"暖和"},
+ {ru:"Этот шарф уступает тому по красоте.",t:["这","条","围巾","不如","那","条","好看"],x:["件","一点"],adj:"好看"},
+ {ru:"Эта сумка гораздо красивее той.",t:["这","个","手提包","比","那","个","漂亮","多了"],x:["很","件"],adj:"漂亮"},
+ {ru:"Эти джинсы не такие длинные, как те брюки.",t:["这","条","牛仔裤","没有","那","条","裤子","那么","长"],x:["双","一点"],acc:["这条牛仔裤没有那条裤子长"],adj:"长"},
+ {ru:"Возражение: «Эти кроссовки ничуть не легче тех!»",t:["这","双","运动鞋","不比","那","双","轻"],x:["没有","很"],adj:"轻",note:{"没有":"С 没有 получилось утверждение «не такие лёгкие», а нужно возражение — 不比."}},
+ {ru:"Это платье немного короче того.",t:["这","条","连衣裙","比","那","条","短","一点"],x:["双","有点"],acc:["这件连衣裙比那件短一点"],adj:"短"},
+ {ru:"Он на 10 сантиметров выше меня.",t:["他","比","我","高","十","公分"],x:["很","个"],adj:"高"},
+ {ru:"Мои перчатки не такие толстые, как твои.",t:["我","的","手套","没有","你","的","那么","厚"],x:["双","比"],acc:["我的手套没有你的厚"],adj:"厚"}
+];
+(function(){
+  let st=S.get("s3",{});const wrap=$("#s3Wrap");
+  function chipHtml(c){const ex=EXTRA[c];const p=PYD[c]||info(c).p||"";return (ex?tip(c):esc(c))+'<span class="py">'+esc(p)+'</span>';}
+  E3.forEach(function(it,i){
+    const all=it.t.concat(it.x);
+    const rec=st[i]||{};
+    let sel=(rec.sel||[]).filter(function(k){return k<all.length;});
+    const pool=rec.pool||shuffle(all.map(function(_,k){return k;}));
+    const d=document.createElement("div");d.className="sitem";
+    d.innerHTML='<div class="ru"><span class="num">'+(i+1)+'</span>'+esc(it.ru)+'</div><div class="sans"></div><div class="spool"></div><div class="diag"></div>';
+    wrap.appendChild(d);
+    const A=$(".sans",d),P=$(".spool",d);
+    function draw(){A.innerHTML="";P.innerHTML="";d.classList.remove("ok","bad");$(".diag",d).textContent="";
+      sel.forEach(function(k,j){const b=document.createElement("button");b.className="chip sel";b.innerHTML=chipHtml(all[k]);b.onclick=function(e){if(e.target.closest(".x"))return;sel.splice(j,1);save();};A.appendChild(b);});
+      pool.forEach(function(k){if(sel.indexOf(k)>=0)return;const b=document.createElement("button");b.className="chip";b.innerHTML=chipHtml(all[k]);b.onclick=function(e){if(e.target.closest(".x"))return;sel.push(k);save();};P.appendChild(b);});}
+    function save(){st[i]={sel:sel,pool:pool};S.set("s3",st);draw();}
+    function toks(){return sel.map(function(k){return all[k];});}
+    d._ok=function(){const s=toks().join("");return s===it.t.join("")||(it.acc||[]).indexOf(s)>=0;};
+    d._check=function(){
+      const ok=d._ok();d.classList.toggle("ok",ok);d.classList.toggle("bad",!ok);const dg=$(".diag",d);
+      if(ok){dg.style.color="var(--ok)";dg.textContent="✓ 对了！";return true;}
+      dg.style.color="var(--red2)";const T=toks();let m="",pen=null;
+      if(!T.length){dg.textContent="Соберите фразу.";return false;}
+      for(let j=0;j<T.length;j++){
+        if((T[j]==="这"||T[j]==="那")&&MWS.indexOf(T[j+1])<0){m="Забыли счётное слово после «"+T[j]+"»!";pen="забыто счётное слово";break;}
+        if(T[j]==="的"&&MWS.indexOf(T[j+1])>=0){m="После 的 счётное слово не ставят.";pen="лишнее счётное слово";break;}
+      }
+      const needMw=it.t.filter(function(t){return MWS.indexOf(t)>=0;})[0];
+      if(!m&&!needMw&&T.some(function(t){return MWS.indexOf(t)>=0;})){m="Здесь счётное слово не нужно.";pen="лишнее счётное слово";}
+      if(!m&&needMw){const used=T.filter(function(t){return MWS.indexOf(t)>=0;});
+        const okMw=[needMw].concat(it.acc?it.acc.join("").split("").filter(function(c){return MWS.indexOf(c)>=0;}):[]);
+        if(used.some(function(u){return okMw.indexOf(u)<0;})){m="Не то счётное слово! Здесь нужно «"+needMw+"».";pen="не то счётное слово";}}
+      if(!m&&T.indexOf("很")>=0)m="很 в сравнении с 比 не используют.";
+      if(!m&&T.indexOf("有点")>=0)m="有点 — «слегка (к сожалению)», для сравнения нужно 一点 после прилагательного.";
+      if(!m&&it.note)for(const k in it.note)if(T.indexOf(k)>=0){m=it.note[k];break;}
+      if(!m&&it.adj){const ai=T.indexOf(it.adj);const after=["三","十","厘米","公分","得多","多了","一点"];
+        if(ai>=0&&T.some(function(t,j){return after.indexOf(t)>=0&&j<ai;}))m="Разница ставится после прилагательного.";}
+      if(!m&&T.length<it.t.length-0&&(it.acc||[]).every(function(a){return a.length!==T.join("").length;}))m="Не хватает слов.";
+      if(!m)m="Порядок слов не тот. Проверьте по шпаргалке.";
+      dg.textContent="✗ "+m;if(pen)penalize(d,pen);return false;
+    };
+    draw();
+  });
+  $("#s3Check").onclick=function(){const items=$$(".sitem",wrap);let n=0;items.forEach(function(d){if(d._check())n++;});
+    const r=$("#s3Res");r.className="msg "+(n===E3.length?"ok":"bad");r.textContent=n===E3.length?"Супер! Все фразы собраны верно 🍒":"Верно: "+n+" из "+E3.length+".";prog("s3",n,E3.length);};
+  prog("s3",$$(".sitem",wrap).filter(function(d){return d._ok();}).length,E3.length);
+})();
+
+/* ========== 四 НА СКОЛЬКО ========== */
+const E4=[
+ {tags:[["这件大衣","¥800"],["那件大衣","¥400"]],s:"这件大衣比那件贵___。",o:["四百块","四十块","一千二百块","四十厘米"],a:0,e:"800 − 400 = 400 → 贵四百块."},
+ {tags:[["这件风衣","¥300"],["那件外套","¥200"]],s:"这件风衣比那件外套贵___。",o:["一百块","五百块","两百块","十块"],a:0,e:"300 − 200 = 100 → 贵一百块."},
+ {tags:[["这条裤子","104 см"],["那条裤子","100 см"]],s:"这条裤子比那条长___。",o:["四厘米","四米","四十厘米","一米"],a:0,e:"104 − 100 = 4 см → 长四厘米."},
+ {tags:[["这条围巾","2 м"],["那条围巾","1,5 м"]],s:"这条围巾比那条长___。",o:["五十厘米","五厘米","五米","一米五"],a:0,e:"2 м − 1,5 м = 0,5 м = 50 см → 长五十厘米."},
+ {tags:[["这个手提包","¥3000"],["那个手提包","¥2900"]],s:"这个手提包比那个贵___。",o:["一点","得多","很","一点多"],a:0,e:"Разница небольшая (100 юаней из 3000) → 贵一点 «чуть дороже»."},
+ {tags:[["这双运动鞋","¥900"],["那双拖鞋","¥30"]],s:"这双运动鞋比那双拖鞋贵___。",o:["得多","一点","很","有点"],a:0,e:"Разница огромная → 贵得多 (или 贵多了) «гораздо дороже»."},
+ {tags:[["这双拖鞋","¥40"],["那双拖鞋","¥80"]],s:"这双拖鞋比那双便宜___。",o:["四十块","一百二十块","四十厘米","四百块"],a:0,e:"80 − 40 = 40 → 便宜四十块."},
+ {tags:[["这双鞋","¥250"],["那双鞋","¥50"]],s:"这双鞋比那双贵___。",o:["两百块","三百块","五十块","两百米"],a:0,e:"250 − 50 = 200 → 贵两百块."},
+ {tags:[["这件毛衣","{原价} ¥200"],["双十一","{打八折}"]],s:"这件毛衣现在___块。",o:["一百六","四十","八十","一百二"],a:0,e:"打八折 — платите 80 %: 200 × 0,8 = 160 (一百六十, в речи 一百六). Это скидка 20 %, а не 80 %!"},
+ {tags:[["我","1,65 м"],["他","1,80 м"]],s:"他比我{高}___。",o:["十五公分","十五米","一米五","一点"],a:0,e:"一米八 − 一米六五 = 15 см → 高十五公分."},
+ {tags:[["这条项链","50 см"],["那条项链","60 см"]],s:"这条项链比那条短___。",o:["十厘米","一米","十米","得多"],a:0,e:"60 − 50 = 10 см → 短十厘米."},
+ {tags:[["这件T恤","¥99"],["那件T恤","¥33"]],s:"这件T恤比那件贵___。",o:["六十六块","三十三块","九十九块","六十块"],a:0,e:"99 − 33 = 66 → 贵六十六块."}
+];
+(function(){
+  let st=S.get("s4",{});const wrap=$("#s4Wrap");
+  E4.forEach(function(it,i){
+    const d=document.createElement("div");d.className="cc";const rec=st[i]||{};
+    const order=rec.order||shuffle(it.o.map(function(_,k){return k;}));let wrong=rec.wrong||[];
+    const tags=it.tags.map(function(t){return '<span class="ptag"><span class="zh">'+rich(t[0])+'</span><span class="v">'+rich(t[1])+'</span></span>';}).join("");
+    function sentHtml(fill){const parts=it.s.split("___");return rich(parts[0])+'<span class="gap">'+(fill?esc(it.o[it.a]):"？")+'</span>'+rich(parts[1]||"");}
+    d.innerHTML='<div class="tags">'+tags+'</div><div class="sent"></div><span class="py"></span><div class="copts"></div><div class="ex2">'+esc(it.e)+'</div>';
+    wrap.appendChild(d);
+    function paint(){const done=!!rec.ok;d.classList.toggle("ok",done);$(".sent",d).innerHTML=sentHtml(done);
+      const base=it.s.replace(/^По норме: /,"");
+      if(done)$(".py",d).textContent=pinyin(base.replace("___",it.o[it.a]));
+      else{const pp=base.split("___");const p2=pinyin(pp[1]||"");$(".py",d).textContent=pinyin(pp[0])+" ___"+(/^[,.!?]/.test(p2)?"":" ")+(p2&&!/^[,.!?]/.test(p2)?p2.charAt(0).toLowerCase()+p2.slice(1):p2);}}
+    order.forEach(function(k){const b=document.createElement("button");b.className="cb";b.textContent=it.o[k];
+      if(wrong.indexOf(k)>=0)b.classList.add("wrong");if(rec.ok&&k===it.a)b.classList.add("right");
+      b.onclick=function(){if(rec.ok||b.classList.contains("wrong"))return;
+        if(k===it.a){rec.ok=1;b.classList.add("right");}else{wrong.push(k);rec.wrong=wrong;b.classList.add("wrong");d.classList.add("shake");setTimeout(function(){d.classList.remove("shake");},360);}
+        rec.order=order;st[i]=rec;S.set("s4",st);paint();score();};
+      $(".copts",d).appendChild(b);});
+    paint();
+  });
+  function score(){const n=E4.filter(function(_,i){return st[i]&&st[i].ok;}).length;scoreBar($("#s4Count"),$("#s4Bar"),n,E4.length,"решено: ");prog("s4",n,E4.length);}
+  $("#s4Reset").onclick=function(){S.set("s4",{});location.hash="#ex4";location.reload();};
+  score();
+})();
+
+/* ========== 五 ПЕРЕВОД ========== */
+/* ru — задание; mw — нужные сч. слова ("" — не нужны); cons — нужная конструкция; re — все верные варианты (после нормализации);
+   ans — эталон; alts — другие верные; keys — обязательные слова (группы синонимов); adj; num — есть точная разница; need — доп. проверки */
+const E5=[
+ {ru:"Эта рубашка дороже той.",mw:"件",cons:["比"],re:/^这件衬衫比那件(衬衫)?(更|还)?贵$/,ans:"这件衬衫比那件贵。",alts:["这件衬衫比那件衬衫贵。","这件衬衫比那件更贵。（«ещё дороже»）"],keys:[["衬衫"],["贵"]],adj:"贵",w:["衬衫","贵","件"]},
+ {ru:"Эти джинсы гораздо удобнее тех.",mw:"条",cons:["比"],re:/^这条牛仔裤比那条(牛仔裤)?舒服(得多|多了)$/,ans:"这条牛仔裤比那条舒服得多。",alts:["这条牛仔裤比那条舒服多了。"],keys:[["牛仔裤"],["舒服"]],adj:"舒服",need:[[/得多|多了/,"Не хватает «гораздо»: после прилагательного нужно 得多 или 多了."]],w:["牛仔裤","舒服","得多","条"]},
+ {ru:"Мой свитер не такой тёплый, как твой.",mw:"",cons:["没有","不如"],re:/^我的毛衣(没有你的(毛衣)?(那么|这么)?|不如你的(毛衣)?)暖和$/,ans:"我的毛衣没有你的暖和。",alts:["我的毛衣没有你的那么暖和。","我的毛衣不如你的暖和。"],keys:[["毛衣"],["暖和"]],adj:"暖和",w:["毛衣","暖和","没有","那么"]},
+ {ru:"Эта юбка на 50 юаней дешевле той.",mw:"条",cons:["比"],re:/^这条裙子比那条(裙子)?便宜五十块$/,ans:"这条裙子比那条便宜五十块。",alts:["这条裙子比那条裙子便宜五十块钱。"],keys:[["裙子"],["便宜"]],adj:"便宜",num:1,w:["裙子","便宜","块","条"]},
+ {ru:"Эти носки немного толще тех.",mw:"双",cons:["比"],re:/^这双袜子比那双(袜子)?厚(一点|一些)$/,ans:"这双袜子比那双厚一点。",alts:["这双袜子比那双厚一些。"],keys:[["袜子"],["厚"]],adj:"厚",need:[[/一点|一些/,"Не хватает «немного»: после прилагательного нужно 一点."]],w:["袜子","厚","一点","双"]},
+ {ru:"Эти кроссовки уступают тем по красоте.",sub:"используйте 不如",mw:"双",cons:["不如"],re:/^这双运动鞋不如那双(运动鞋)?(好看|漂亮)$/,ans:"这双运动鞋不如那双好看。",alts:["这双运动鞋不如那双漂亮。"],keys:[["运动鞋"],["好看","漂亮"]],adj:"好看",w:["运动鞋","不如","好看","双"]},
+ {ru:"— Твой шарф слишком длинный! — Мой шарф вовсе не длиннее твоего!",sub:"переведите ответ",mw:"",cons:["不比"],re:/^(我的围巾|它|我这条围巾)不比你的(围巾)?长$/,ans:"我的围巾不比你的长！",alts:["我的围巾不比你的围巾长！","它不比你的长！"],keys:[["长"]],adj:"长",w:["围巾","不比","长"]},
+ {ru:"Этот галстук не такой модный, как тот.",mw:"条",cons:["没有","不如"],re:/^这条领带(没有那条(领带)?(那么)?|不如那条(领带)?)(时尚|流行)$/,ans:"这条领带没有那条那么时尚。",alts:["这条领带没有那条时尚。","这条领带不如那条时尚。"],keys:[["领带"],["时尚","流行"]],adj:"时尚",w:["领带","时尚","没有","那么","条"]},
+ {ru:"Эти брюки на 3 сантиметра длиннее тех.",mw:"条",cons:["比"],re:/^这条裤子比那条(裤子)?长三(厘米|公分)$/,ans:"这条裤子比那条长三厘米。",alts:["这条裤子比那条长三公分。"],keys:[["裤子"],["长"]],adj:"长",num:1,w:["裤子","长","厘米","条"]},
+ {ru:"Красный цвет идёт вам больше, чем чёрный.",mw:"",cons:["比"],re:/^红(色)?比黑(色)?(更|还)?适合你$/,ans:"红色比黑色更适合你。",alts:["红色比黑色适合你。","红色比黑色更适合您。"],keys:[["红"],["黑"],["适合"]],adj:"适合",w:["红色","黑色","适合","更"]}
+];
+function numZh(n){const D="零一二三四五六七八九";if(n<10)return D[n];if(n<20)return "十"+(n%10?D[n%10]:"");if(n<100)return D[Math.floor(n/10)]+"十"+(n%10?D[n%10]:"");return String(n);}
+function normT(s){return String(s).replace(/[\s，。！？、,.!?；;：:"“”'‘’—\-（）()«»]/g,"").replace(/一点儿/g,"一点").replace(/有点儿/g,"有点")
+  .replace(/块钱/g,"块").replace(/元/g,"块").replace(/您/g,"你").replace(/\d+/g,function(n){return numZh(+n);});}
+function lcsOps(a,b){
+  const n=a.length,m=b.length,L=[];for(let i=0;i<=n;i++){L.push(new Array(m+1).fill(0));}
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=a[i]===b[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  const ops=[];let i=0,j=0;
+  while(i<n&&j<m){if(a[i]===b[j]){ops.push(["=",a[i]]);i++;j++;}else if(L[i+1][j]>=L[i][j+1]){ops.push(["-",a[i]]);i++;}else{ops.push(["+",b[j]]);j++;}}
+  while(i<n)ops.push(["-",a[i++]]);while(j<m)ops.push(["+",b[j++]]);
+  return{ops:ops,len:L[0][0]};
+}
+function diffHtml(user,target){
+  const r=lcsOps(user.split(""),target.split(""));
+  return r.ops.map(function(o){return o[0]==="="?esc(o[1]):o[0]==="-"?"<del>"+esc(o[1])+"</del>":"<ins>"+esc(o[1])+"</ins>";}).join("");
+}
+function trDiag(v,it){
+  const f=[];let pen=null;
+  if(/[A-Za-zāáǎàēéěèīíǐìōóǒòūúǔù]/.test(v)&&!/T恤/i.test(v))f.push("Пишите иероглифами, а не пиньинем.");
+  const miss=v.match(/(这|那)(?![件条双个副么])/);
+  if(miss){f.push(it.mw?"Забыто счётное слово после «"+miss[1]+"»: нужно "+it.mw+".":"Забыто счётное слово после «"+miss[1]+"».");pen="забыто счётное слово";}
+  const used=(v.match(/(这|那|的)([件条双个副顶枚块])/g)||[]);
+  used.forEach(function(u){
+    if(u[0]==="的"){f.push("После 的 счётное слово не ставят: «"+u+"» → «的».");pen=pen||"лишнее счётное слово";}
+    else if(!it.mw||it.mw.indexOf(u[1])<0){f.push("Не то счётное слово «"+u[1]+"»"+(it.mw?": здесь нужно "+it.mw+".":"."));pen=pen||"не то счётное слово";}
+  });
+  it.keys.forEach(function(g){if(!g.some(function(k){return v.indexOf(k)>=0;})){const w=info(g[0]);f.push("Не хватает слова "+g.join(" / ")+(w.p?" ("+w.p+" — "+w.r+")":"")+".");}});
+  if(!it.cons.some(function(c){return v.indexOf(c)>=0;})){
+    if(it.cons[0]==="不比"&&v.indexOf("没有")>=0)f.push("С 没有 получилось утверждение «мой короче», а нужно возражение — 不比.");
+    else f.push("Нужна конструкция "+it.cons.join(" или ")+".");
+  }
+  if(/很|非常|太/.test(v)&&v.indexOf("比")>=0)f.push("После 比 нельзя 很 / 非常 / 太. «Гораздо» — 得多 / 多了.");
+  const vv=v.replace(/不比|不如/g,"");
+  if(/比.*(不|没)/.test(vv))f.push("Отрицание внутрь 比 не ставят. «Не такой…, как» — 没有.");
+  if(v.indexOf("有点")>=0)f.push("有点 — «слегка (к сожалению)», для сравнения нужно 一点 после прилагательного.");
+  if(v.indexOf("比较")>=0)f.push("比较 — «довольно», это не сравнение; уберите его.");
+  if(it.cons[0]!=="比"&&/(没有|不如|不比).*(一点|一些|得多|多了|[一二三四五六七八九十]+(块|厘米|公分))/.test(v))f.push("После 没有 / 不如 / 不比 разницу (一点, 得多, число) не добавляют.");
+  if(it.num&&it.adj){const ai=v.indexOf(it.adj),ni=v.search(/[一二三四五六七八九十]+(块|厘米|公分)/);if(ai>=0&&ni>=0&&ni<ai)f.push("Разница ставится после прилагательного: "+it.adj+" + число.");}
+  if(it.num&&!/[一二三四五六七八九十]/.test(v))f.push("Не хватает точной разницы (числа).");
+  (it.need||[]).forEach(function(n){if(!n[0].test(v))f.push(n[1]);});
+  return{f:f,pen:pen};
+}
+(function(){
+  let st=S.get("tr",{});const wrap=$("#trWrap");
+  E5.forEach(function(it,i){
+    const d=document.createElement("div");d.className="tri";
+    d.innerHTML='<div class="ru"><span class="num">'+(i+1)+'</span><div>'+esc(it.ru)+(it.sub?'<small>('+esc(it.sub)+')</small>':"")+'</div></div>'+
+      '<div class="irow"><input class="tinp" type="text" placeholder="写在这里…" autocomplete="off" spellcheck="false"><button class="btn small hb">слова</button><button class="btn small primary cb1">проверить</button></div>'+
+      '<div class="hintw"></div><div class="tres"></div>';
+    wrap.appendChild(d);
+    const inp=$(".tinp",d),hw=$(".hintw",d);
+    it.w.forEach(function(c){const w=info(c);const b=document.createElement("span");b.className="chip";b.innerHTML=esc(c)+'<span class="py">'+esc(w.p)+'</span><span class="tr">'+esc(w.r)+'</span>';hw.appendChild(b);});
+    inp.value=(st[i]&&st[i].v)||"";
+    inp.oninput=function(){st[i]={v:inp.value};S.set("tr",st);d.classList.remove("checked","ok","bad");score();};
+    inp.onkeydown=function(e){if(e.key==="Enter")d._check(true);};
+    $(".hb",d).onclick=function(){hw.classList.toggle("show");};
+    d._ok=function(){const v=normT(inp.value);return!!v&&it.re.test(v);};
+    d._check=function(withPen){
+      const raw=inp.value.trim(),v=normT(raw),box=$(".tres",d);
+      if(!v){d.classList.add("checked","bad");d.classList.remove("ok");box.innerHTML='<div class="verdict" style="color:var(--red2)">Введите перевод.</div>';return false;}
+      const ok=it.re.test(v);
+      d.classList.add("checked");d.classList.toggle("ok",ok);d.classList.toggle("bad",!ok);
+      const variants=[it.ans].concat(it.alts).map(function(a){return a.replace(/（.*?）/,"");});
+      let html="";
+      if(ok){html+='<div class="verdict" style="color:var(--ok)">✓ 对了！Перевод верный.</div>';}
+      else{
+        const D=trDiag(v,it);
+        let best=variants[0],bl=-1;variants.forEach(function(a){const n=normT(a),l=lcsOps(v.split(""),n.split("")).len-Math.abs(n.length-v.length)*0.01;if(l>bl){bl=l;best=a;}});
+        html+='<div class="verdict" style="color:var(--red2)">✗ Есть ошибки</div>';
+        html+='<ul>'+(D.f.length?D.f:["Похоже на опечатку, лишнее или пропущенное слово — смотрите сравнение ниже."]).map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+'</ul>';
+        html+='<div class="lab">Ваш ответ → исправление</div><div class="diff">'+diffHtml(v,normT(best))+'</div><div class="legend"><del style="color:var(--red2)">красное</del> — лишнее, <span style="color:var(--ok);font-weight:800">зелёное</span> — пропущено</div>';
+        if(withPen&&D.pen)penalize(d,D.pen);
+      }
+      html+='<div class="lab">'+(ok?"Эталон":"Правильный ответ")+'</div><div class="ansl">'+zhBlock(it.ans)+'</div>';
+      html+='<div class="lab">Тоже верно</div>'+it.alts.map(function(a){const m=a.match(/（(.*?)）/);const z=a.replace(/（.*?）/,"");return '<div class="ansl">'+zhBlock(z,m?m[1]:"")+'</div>';}).join("");
+      box.innerHTML=html;
+      st[i]={v:inp.value,checked:1};S.set("tr",st);score();return ok;
+    };
+    $(".cb1",d).onclick=function(){d._check(true);};
+    if(st[i]&&st[i].checked&&inp.value)d._check(false);
+  });
+  function score(){const n=$$(".tri",wrap).filter(function(d){return d.classList.contains("checked")&&d._ok();}).length;scoreBar($("#trCount"),$("#trBar"),n,E5.length,"верно: ");prog("tr",n,E5.length);return n;}
+  $("#trCheck").onclick=function(){let n=0;$$(".tri",wrap).forEach(function(d){if(d._check(true))n++;});
+    const r=$("#trRes");r.className="msg "+(n===E5.length?"ok":"bad");r.textContent=n===E5.length?"太棒了！Все переводы верны 🍒":"Верно: "+n+" из "+E5.length+". Разбор — под каждым предложением.";};
+  $("#trReset").onclick=function(){if(!confirm("Очистить все переводы?"))return;S.set("tr",{});location.hash="#trans";location.reload();};
+  score();
+})();
+
+/* ========== 五 СЧЁТНЫЕ СЛОВА ========== */
+(function(){
+  const SH=[["件","верх тела, верхняя одежда"],["条","длинное: брюки, юбки, шарфы"],["双","пара: обувь, носки"],["个","универсальное"]];
+  const ITEMS=[["T恤",["件"]],["衬衫",["件"]],["毛衣",["件"]],["外套",["件"]],["大衣",["件"]],["风衣",["件"]],
+    ["裤子",["条"]],["裙子",["条"]],["牛仔裤",["条"]],["短裤",["条"]],["连衣裙",["条","件"]],["围巾",["条"]],["项链",["条"]],["领带",["条"]],
+    ["袜子",["双"]],["鞋",["双"]],["运动鞋",["双"]],["拖鞋",["双"]],["口罩",["个"]],["手提包",["个"]]];
+  let placed=S.get("sh",{}),err=S.get("shErr",0),sel=null;
+  const box=$("#shelves"),bank=$("#sBank");
+  function chipIn(c){const w=info(c);return esc(c)+'<span class="py">'+esc(w.p)+'</span><span class="tr">'+esc(w.r)+'</span>';}
+  function build(){
+    box.innerHTML="";bank.innerHTML="";sel=null;
+    SH.forEach(function(s){const r=document.createElement("div");r.className="shelf";r.dataset.m=s[0];
+      r.innerHTML='<div class="lbl"><span class="ic">'+s[0]+'</span><span class="nm">'+s[1]+'</span></div><div class="slot"></div>';
+      r.onclick=function(){drop(r);};box.appendChild(r);});
+    shuffle(ITEMS).forEach(function(it){
+      const b=document.createElement("button");b.className="chip";b.dataset.c=it[0];b.innerHTML=chipIn(it[0]);
+      b.onclick=function(e){e.stopPropagation();if(b.classList.contains("done"))return;
+        if(sel)sel.classList.remove("sel");sel=(sel===b)?null:b;if(sel)sel.classList.add("sel");
+        $$(".shelf",box).forEach(function(r){r.classList.toggle("hot",!!sel);});};
+      if(placed[it[0]]){b.classList.add("done");$(".shelf[data-m='"+placed[it[0]]+"'] .slot",box).appendChild(b);}else bank.appendChild(b);
+    });
+    score();
+  }
+  function drop(r){
+    if(!sel)return;const it=ITEMS.filter(function(x){return x[0]===sel.dataset.c;})[0];
+    if(it[1].indexOf(r.dataset.m)>=0){sel.classList.remove("sel");sel.classList.add("done");$(".slot",r).appendChild(sel);
+      placed[sel.dataset.c]=r.dataset.m;S.set("sh",placed);sel=null;$$(".shelf",box).forEach(function(x){x.classList.remove("hot");});score();}
+    else{err++;S.set("shErr",err);r.classList.add("shake");setTimeout(function(){r.classList.remove("shake");},360);penalize(r,"не та полка");score();}
+  }
+  function score(){const n=Object.keys(placed).length;scoreBar($("#shCount"),$("#shBar"),n,ITEMS.length);$("#shErr").textContent=err?"ошибок: "+err:"";prog("sh",n,ITEMS.length);}
+  $("#shReset").onclick=function(){placed={};err=0;S.set("sh",placed);S.set("shErr",0);build();};
+  build();
+})();
+(function(){
+  /* [по-русски, цвет, предмет, глагол, допустимые сч. слова, примечание] */
+  const W=[
+    ["надеть белую рубашку","白色","衬衫","穿",["件"]],
+    ["надеть красный шарф","红色","围巾","戴",["条"]],
+    ["надеть чёрное пальто","黑色","大衣","穿",["件"]],
+    ["надеть серый свитер","灰色","毛衣","穿",["件"]],
+    ["надеть синие джинсы","蓝色","牛仔裤","穿",["条"]],
+    ["надеть розовую маску","粉色","口罩","戴",["个"]],
+    ["надеть коричневые туфли","棕色","鞋","穿",["双"]],
+    ["надеть красную футболку","红色","T恤","穿",["件"]],
+    ["надеть оранжевое платье","橙色","连衣裙","穿",["条","件"]],
+    ["надеть жёлтые кроссовки","黄色","运动鞋","穿",["双"]],
+    ["надеть фиолетовый галстук","紫色","领带","戴",["条"],"В речи чаще 打领带 / 系领带 «завязать галстук»."],
+    ["надеть зелёные шорты","绿色","短裤","穿",["条"]]
+  ];
+  const VB=["？","穿","戴"],MB=["？","件","条","双","个"];
+  let st=S.get("wr",W.map(function(){return[0,0];}));if(st.length!==W.length)st=W.map(function(){return[0,0];});
+  const wrap=$("#wWrap");
+  W.forEach(function(w,i){
+    const r=document.createElement("div");r.className="wr";
+    r.innerHTML='<div class="q">'+(i+1)+'. '+esc(w[0])+'</div><div class="s">我想<button class="cyc v"></button>一<button class="cyc m"></button>'+esc(w[1])+'的'+esc(w[2])+'。</div>'+
+      '<span class="py"></span><div class="note2"></div>';
+    wrap.appendChild(r);
+    const bv=$(".v",r),bm=$(".m",r);
+    function paint(){bv.textContent=VB[st[i][0]];bv.classList.toggle("set",st[i][0]>0);bm.textContent=MB[st[i][1]];bm.classList.toggle("set",st[i][1]>0);
+      r.classList.remove("ok","bad");$(".note2",r).textContent="";
+      const v=st[i][0]?VB[st[i][0]]:"___",m=st[i][1]?MB[st[i][1]]:"___";
+      const tail=pinyin(w[1]+"的"+w[2]+"。");
+      $(".py",r).textContent="Wǒ xiǎng "+(st[i][0]?PYD[v]:"___")+" "+(st[i][1]?PYD["一"+m]:"yī ___")+" "+tail.charAt(0).toLowerCase()+tail.slice(1);}
+    bv.onclick=function(){st[i][0]=(st[i][0]+1)%VB.length;S.set("wr",st);paint();};
+    bm.onclick=function(){st[i][1]=(st[i][1]+1)%MB.length;S.set("wr",st);paint();};
+    r._ok=function(){return VB[st[i][0]]===w[3]&&w[4].indexOf(MB[st[i][1]])>=0;};
+    r._check=function(){const ok=r._ok();r.classList.toggle("ok",ok);r.classList.toggle("bad",!ok);const n=$(".note2",r);
+      if(ok){n.style.color="var(--ok)";n.textContent=w[5]?"✓ "+w[5]:"✓";return true;}
+      n.style.color="var(--red2)";
+      if(!st[i][0]&&!st[i][1]){n.textContent="✗ Не выполнено: выберите глагол и счётное слово.";}
+      else if(!st[i][1]){n.textContent="✗ Забыли счётное слово!";penalize(r,"забыто счётное слово");}
+      else if(w[4].indexOf(MB[st[i][1]])<0){n.textContent="✗ Не то счётное слово для «"+w[2]+"».";penalize(r,"не то счётное слово");}
+      else n.textContent=st[i][0]?"✗ Глагол: "+w[2]+" — "+(w[3]==="穿"?"на тело или на ноги → 穿":"аксессуар или выше груди → 戴")+".":"✗ Выберите глагол 穿 или 戴.";
+      return false;};
+    paint();
+  });
+  $("#wCheck").onclick=function(){let n=0;$$(".wr",wrap).forEach(function(r){if(r._check())n++;});
+    const m=$("#wRes");m.className="msg "+(n===W.length?"ok":"bad");m.textContent=n===W.length?"Отлично! Гардероб собран 🍒":"Верно: "+n+" из "+W.length+".";prog("wr",n,W.length);};
+  $("#wReset").onclick=function(){st=W.map(function(){return[0,0];});S.set("wr",st);location.hash="#mw";location.reload();};
+  prog("wr",$$(".wr",wrap).filter(function(r){return r._ok();}).length,W.length);
+})();
+
+/* ========== 六 ПИСЬМО ========== */
+(function(){
+  const Q=[
+    ["比 + 得多 / 多了","Сравните две вещи из своего шкафа: какая гораздо теплее, удобнее или дороже?","Пример начала: 我的这件毛衣比那件…"],
+    ["比 + точная разница","Сравните две вещи по цене (в юанях) или по длине (в сантиметрах).","Не забудьте: разница — после прилагательного, счётное слово — после 这/那."],
+    ["没有 … 那么","Что в вашем гардеробе не такое модное (时尚) или тёплое, как у друга или подруги?","我的外套没有…"],
+    ["不如","Сравните кроссовки и туфли (или джинсы и брюки): что чему уступает и в чём?","…不如…舒服 / 好看"],
+    ["不比","Друг говорит: «你的手表太贵了！» Возразите ему.","不贵！它不比…"],
+    ["比 + 一点 / 得多 · 适合","Вы в магазине примерили (试穿) две вещи. Сравните их и скажите, какая вам больше подходит.","这件比那件…一点，…更适合我。"]
+  ];
+  let st=S.get("wp",{});const wrap=$("#wpWrap");
+  Q.forEach(function(q,i){
+    const d=document.createElement("div");d.className="wp";
+    d.innerHTML='<div class="q">'+(i+1)+'. <span class="zh" style="color:var(--red)">'+esc(q[0])+'</span> — '+esc(q[1])+'</div><div class="hint2">'+esc(q[2])+'</div><textarea placeholder="写在这里…"></textarea>';
+    wrap.appendChild(d);
+    const ta=$("textarea",d);ta.value=st[i]||"";
+    ta.oninput=function(){st[i]=ta.value;S.set("wp",st);upd();};
+  });
+  function upd(){const n=Q.filter(function(_,i){return(st[i]||"").replace(/\s/g,"").length>=5;}).length;prog("wp",n,Q.length);}
+  upd();
+})();
+</script>
+</body>
+</html>
